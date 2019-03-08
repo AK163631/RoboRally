@@ -16,7 +16,5 @@ public class CornerConveyor extends BoardEntity {
 			return;
 		}
 		player.setDirection(this.getFinalRepr().toUpperCase()); // sets direction of player
-
 	}
-
 }
