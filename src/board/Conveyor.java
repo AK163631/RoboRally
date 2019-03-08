@@ -3,7 +3,7 @@ package board;
 import main.Player;
 
 public class Conveyor extends BoardEntity {
-	private String direction;
+	private String direction; // direction it is moving
 
 	public Conveyor(int x, int y, Board board, String repr, String direction) {
 		super(x, y, board, repr);
