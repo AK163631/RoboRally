@@ -6,5 +6,4 @@ public class NoLocation extends BoardEntity {
 		// place holder class
 		super(x, y, board, repr);
 	}
-
 }

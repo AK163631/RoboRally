@@ -18,18 +18,22 @@ public abstract class BoardEntity {
 		this.finalRepr = repr;
 	}
 
-	public void setLocation(int x, int y) {
-		this.x = x;
-		this.y = y;
+	public void act(Player player, BoardEntity prevEntity) {
+		// will act on activation
 	}
 
-	public void setRepr(String repr) {
-		this.repr = repr;
+	public void actOnEntry(Player player, BoardEntity prevEntity) {
+		// act when robot enters
+		// most classes don't need it
 	}
 
 	public void RestorRepr() {
 		// Restores original representation
 		this.repr = this.getFinalRepr();
+	}
+
+	public void setRepr(String repr) {
+		this.repr = repr;
 	}
 
 	public int getX() {
@@ -40,26 +44,16 @@ public abstract class BoardEntity {
 		return this.y;
 	}
 
-	@Override
-	public String toString() {
-		return this.repr;
-	}
-
-	public void act(Player player, BoardEntity prevEntity) {
-		// will act on activation
-	}
-
-	public void actOnEntry(Player player, BoardEntity prevEntity) {
-		// act when robot enters
-		// most classes don't need it
-
-	}
-
 	public String getFinalRepr() {
 		return finalRepr;
 	}
 
 	public Board getBoard() {
 		return board;
+	}
+
+	@Override
+	public String toString() {
+		return this.repr;
 	}
 }

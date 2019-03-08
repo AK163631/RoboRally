@@ -10,6 +10,6 @@ public class Flag extends BoardEntity {
 
 	@Override
 	public void actOnEntry(Player player, BoardEntity prevEntity) {
-
+		// TODO setup flags properly
 	}
 }

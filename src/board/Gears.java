@@ -16,5 +16,4 @@ public class Gears extends BoardEntity {
 			player.turnACW90(1);
 		}
 	}
-
 }

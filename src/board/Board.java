@@ -14,16 +14,12 @@ public class Board {
 	public Board(ArrayList<String> lines) {
 
 		this.xLen = lines.get(1).replaceAll(" ", "").length();
-
 		this.yLen = lines.size() - 1;
 
 		// build empty board
 		for (int y = 0; y < yLen; y++) {
-
 			board.add(new ArrayList<BoardEntity>());
-
 			for (int x = 0; x < xLen; x++) {
-
 				board.get(y).add(null);
 			}
 		}
@@ -132,10 +128,6 @@ public class Board {
 		this.board.get(bE.getY()).set(bE.getX(), bE);
 	}
 
-	public ArrayList<Player> getPlayers() {
-		return this.players;
-	}
-
 	public Player checkPlayerAtLocation(int x, int y) {
 		// if player found at location, return player
 		// otherwise return null
@@ -145,10 +137,6 @@ public class Board {
 			}
 		}
 		return null;
-	}
-
-	public ArrayList<ArrayList<BoardEntity>> getBoard() {
-		return this.board;
 	}
 
 	public void pushPlayer(Player player, String direction) {
@@ -178,6 +166,14 @@ public class Board {
 		bE.actOnEntry(player, prevBe); // call bE action
 
 		return bE; // returns board entity player is on-top of
+	}
+
+	public ArrayList<ArrayList<BoardEntity>> getBoard() {
+		return this.board;
+	}
+
+	public ArrayList<Player> getPlayers() {
+		return this.players;
 	}
 
 	@Override

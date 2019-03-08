@@ -36,6 +36,5 @@ public class Conveyor extends BoardEntity {
 			return false;
 		}
 		return true;
-
 	}
 }

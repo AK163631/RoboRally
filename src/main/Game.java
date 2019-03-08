@@ -18,13 +18,12 @@ public class Game {
 	public Game(String brdPath, String prgPath) {
 		// load board from file
 		try {
-
 			this.board = new Board(new ArrayList<String>(Files.readAllLines(new File(brdPath).toPath())));
 			this.players = this.board.getPlayers();
 			this.SetupPlayers(new ArrayList<String>(Files.readAllLines(new File(prgPath).toPath())));
-
+		
 		} catch (IOException e) {
-
+			
 			System.out.println("File not found");
 			System.exit(-1); // quits game
 		}
@@ -49,14 +48,12 @@ public class Game {
 			BoardEntity bE = this.board.getBoard().get(p.getY()).get(p.getX());
 			bE.setRepr(p.getRepr()); // sets initial repr
 		}
-
 		for (Player p : (ArrayList<Player>) this.players.clone()) { // should not change over iterating array
 			// removes unused players
 			if (p.getName() == null) {
 				this.players.remove(p);
 			}
 		}
-
 		// set initial player instructions
 		for (int i = 2; i < lines.size(); i++) {
 			String[] tokens = lines.get(i).split(" ");

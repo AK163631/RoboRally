@@ -15,7 +15,7 @@ public class Player {
 	private BoardEntity prevEntity;
 	private BoardEntity onTopOf;
 	private int directionIndex = 0;
-	private int health = 5;
+	private int health = 5; // not used yet
 	private int initalX;
 	private int initalY;
 	private int x;
@@ -31,9 +31,8 @@ public class Player {
 		this.initalY = y;
 		this.repr = repr;
 		this.board = board;
-
 	}
-	
+
 	public void fireLaser() {
 		// fires laser
 	}
@@ -41,11 +40,6 @@ public class Player {
 	public void activateEntity() {
 		this.onTopOf.act(this, this.prevEntity);
 		// activates board entity it is on-top of
-	}
-
-	public void setLocation(int x, int y) {
-		this.x = x;
-		this.y = y;
 	}
 
 	public void restPlayer() {
@@ -71,30 +65,25 @@ public class Player {
 				p = this.board.checkPlayerAtLocation(loc[0], loc[1]);
 				bE = this.board.getBoard().get(loc[1]).get(loc[0]);
 			} catch (IndexOutOfBoundsException e) {
-				// in-case location is out of bounds i.e east on default board
+				// in-case location is out of bounds i.e south on default board
 				// skips location
 				continue;
 			}
-
 			// checks if player not found and object at location is Nolocation then accepts
 			// location
 			if (p == null && bE instanceof NoLocation) {
 				this.board.placePlayer(loc[0], loc[1], this);
 				break; // no need to check other locations
 			}
-
 		}
-
 	}
 
 	public void turnACW90(int multiplyer) {
 		this.directionIndex -= multiplyer;
-
 	}
 
 	public void turnCW90(int multiplyer) {
 		this.directionIndex += multiplyer;
-
 	}
 
 	public void executeInstruction(String instruction) {
@@ -112,21 +101,6 @@ public class Player {
 		} else if (instruction == "U") {
 			this.turnCW90(2);
 		}
-
-	}
-
-	public void setDirection(String direction) {
-		this.directionIndex = this.directions.indexOf(direction);
-	}
-
-	public String getDirection() {
-		// behaves cyclically
-		if (this.directionIndex < 0)
-			return this.directions.get(this.directionIndex + this.directions.size());
-		else {
-			return this.directions.get(this.directionIndex % this.directions.size());
-		}
-
 	}
 
 	public void moveForward() {
@@ -146,18 +120,29 @@ public class Player {
 			System.err.println("Fallen: " + this.toString());
 			this.restPlayer();
 		}
-
 	}
 
 	public void moveBackward() {
 		this.turnCW90(2); // flip
 		this.moveForward();
 		this.turnCW90(2); // return to original direction
-
 	}
 
-	public String getRepr() {
-		return this.repr;
+	public void addInstruction(String instruction) {
+		// add instruction block to instructions
+		this.instructions.add(new ArrayList<String>(Arrays.asList(instruction.split(""))));
+	}
+
+	public void addInstructions(ArrayList<String> instructions) {
+		// add list of instructions to instructions
+		for (String st : instructions) {
+			this.addInstruction(st);
+		}
+	}
+
+	public void setLocation(int x, int y) {
+		this.x = x;
+		this.y = y;
 	}
 
 	public int getX() {
@@ -166,20 +151,6 @@ public class Player {
 
 	public int getY() {
 		return this.y;
-	}
-
-	public void addInstruction(String instruction) {
-		// add instruction block to instructions
-		this.instructions.add(new ArrayList<String>(Arrays.asList(instruction.split(""))));
-
-	}
-
-	public void addInstructions(ArrayList<String> instructions) {
-		// add list of instructions to instructions
-		for (String st : instructions) {
-			this.addInstruction(st);
-		}
-
 	}
 
 	public void setName(String name) {
@@ -195,11 +166,26 @@ public class Player {
 		this.prevEntity = bE;
 	}
 
+	public String getRepr() {
+		return this.repr;
+	}
+
+	public void setDirection(String direction) {
+		this.directionIndex = this.directions.indexOf(direction);
+	}
+
+	public String getDirection() {
+		// behaves cyclically
+		if (this.directionIndex < 0)
+			return this.directions.get(this.directionIndex + this.directions.size());
+		else {
+			return this.directions.get(this.directionIndex % this.directions.size());
+		}
+	}
+
 	@Override
 	public String toString() {
 		return this.getName() + " " + this.getRepr() + " " + this.getDirection() + " "
 				+ Arrays.toString(this.instructions.toArray()) + " (" + this.getX() + "," + this.getY() + ") ";
-
 	}
-
 }

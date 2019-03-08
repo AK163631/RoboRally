@@ -12,5 +12,4 @@ public class Pit extends BoardEntity{
 	public void actOnEntry(Player player, BoardEntity prevEntity) {
 		player.restPlayer();
 	}
-
 }
