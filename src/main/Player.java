@@ -5,6 +5,7 @@ import java.util.Arrays;
 
 import board.Board;
 import board.BoardEntity;
+import board.Flag;
 import board.NoLocation;
 
 public class Player {
@@ -12,8 +13,11 @@ public class Player {
 	private ArrayList<ArrayList<String>> instructions = new ArrayList<ArrayList<String>>();
 	private final ArrayList<String> directions = new ArrayList<String>(
 			Arrays.asList(new String[] { "N", "E", "S", "W" }));
+	private ArrayList<Flag> flags = new ArrayList<Flag>();
 	private BoardEntity prevEntity;
-	private BoardEntity onTopOf;
+	public BoardEntity onTopOf;
+	
+
 	private int directionIndex = 0;
 	private int health = 5; // not used yet
 	private int initalX;
@@ -32,17 +36,67 @@ public class Player {
 		this.repr = repr;
 		this.board = board;
 	}
-	
+
 	public void decreaseHealth(int factor) {
 		this.health -= factor;
-		
-		if(this.health <= 0) {
+
+		if (this.health <= 0) {
 			// player must have died
 			this.restPlayer();
 		}
 	}
+	
+	public void addFlag(Flag flag) {
+		// checks if flag is in correct order
+		// adds if is
+		// ignores other wise
+	}
 
 	public void fireLaser() {
+		// function needs optimisation
+		
+		// resolves first player in front of player
+		// decreases its health by one
+		
+		String dir = this.getDirection();
+
+		if (dir == "N") {
+			for (int i = 1; i >= this.y - i; i++) {
+				Player p = this.board.checkPlayerAtLocation(this.x, this.y - i);
+				if (p != null) {
+					p.decreaseHealth(1);
+					break;
+				}
+			}
+
+		} else if (dir == "E") {
+			for (int i = 1; i + this.x  < this.board.getxLen(); i++) {
+				Player p = this.board.checkPlayerAtLocation(this.x + i, this.y);
+				if (p != null) {
+					p.decreaseHealth(1);
+					break;
+				}
+			}
+
+		} else if (dir == "S") {
+			for (int i = 1; this.y + i < this.board.getyLen(); i++) {
+				Player p = this.board.checkPlayerAtLocation(this.x, this.y + i);
+				if (p != null) {
+					p.decreaseHealth(1);
+					break;
+				}
+			}
+
+		} else if (dir == "W") {
+			for (int i = 1; this.x - i >= 0; i++) {
+				Player p = this.board.checkPlayerAtLocation(this.x - i, this.y);
+				if (p != null) {
+					p.decreaseHealth(1);
+					break;
+				}
+			}
+
+		}
 		// fires laser
 	}
 
@@ -191,10 +245,14 @@ public class Player {
 			return this.directions.get(this.directionIndex % this.directions.size());
 		}
 	}
+	
+	public BoardEntity getOnTopOf() {
+		return onTopOf;
+	}
 
 	@Override
 	public String toString() {
 		return this.getName() + " " + this.getRepr() + " " + this.getDirection() + " "
-				+ Arrays.toString(this.instructions.toArray()) + " (" + this.getX() + "," + this.getY() + ") ";
+				+ Arrays.toString(this.instructions.toArray()) + " (" + this.getX() + "," + this.getY() + ") " + this.health;
 	}
 }

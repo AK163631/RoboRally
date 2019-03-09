@@ -13,10 +13,15 @@ public class Laser extends BoardEntity {
 	@Override
 	public void act(Player player, BoardEntity prevEntity) {
 		this.bEAtLocation.act(player, prevEntity); // calls act of object it on top of
-		if(player.getX() == this.getX() && player.getY() == this.getY()) {
-			// checks if still in-front of laser
+		if(player.getOnTopOf() instanceof Laser) {
+			// checks if player is still in laser
 			player.decreaseHealth(1); // decrease health by one 
 		}
+	}
+	
+	public void actOnENtry(Player player, BoardEntity prevEntity) {
+		this.bEAtLocation.actOnEntry(player, prevEntity); // calls objects on entry function
+		
 	}
 	
 	public void WrapBe(BoardEntity bE) {

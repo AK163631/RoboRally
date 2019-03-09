@@ -9,6 +9,8 @@ public class Board {
 	private ArrayList<ArrayList<BoardEntity>> board = new ArrayList<ArrayList<BoardEntity>>();
 	private ArrayList<Player> players = new ArrayList<>();
 	private int xLen;
+	
+
 	private int yLen;
 
 	public Board(ArrayList<String> lines) {
@@ -245,6 +247,14 @@ public class Board {
 	public ArrayList<Player> getPlayers() {
 		return this.players;
 
+	}
+	
+	public int getxLen() {
+		return xLen;
+	}
+
+	public int getyLen() {
+		return yLen;
 	}
 
 	@Override
