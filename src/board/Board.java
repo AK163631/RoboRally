@@ -12,6 +12,7 @@ public class Board {
 	private int yLen;
 
 	public Board(ArrayList<String> lines) {
+		// set up board
 
 		this.xLen = lines.get(1).replaceAll(" ", "").length();
 		this.yLen = lines.size() - 1;
@@ -106,12 +107,19 @@ public class Board {
 				case "x":
 					bE = new Pit(x, y - 1, this, "x");
 					break;
-				/*
-				 * 
-				 * case "[": bE = new LaserMarker(x, y - 1, this, "["); break; case "]": bE =
-				 * new LaserMarker(x, y - 1, this, "]"); break; case "(": bE = new Laser(x, y -
-				 * 1, this, "("); break; case ")": bE = new Laser(x, y - 1, this, ")"); break;
-				 */
+
+				case "[":
+					bE = new LaserMarker(x, y - 1, this, "[");
+					break;
+				case "]":
+					bE = new LaserMarker(x, y - 1, this, "]");
+					break;
+				case "(":
+					bE = new LaserMarker(x, y - 1, this, "(");
+					break;
+				case ")":
+					bE = new LaserMarker(x, y - 1, this, ")");
+					break;
 
 				default:
 					bE = new NoLocation(x, y - 1, this, ".");
@@ -121,11 +129,70 @@ public class Board {
 			}
 
 		}
+		
+		this.parseVerticalLaserPoints();
+		this.parseHorizontalLaserPoints();
 
+	}
+
+	public void parseVerticalLaserPoints() {
+		// replaces noLocation objects vertically between laser markers ( ) with laser
+		// objects
+		Boolean pointFound = false;
+		int index = 0;
+		for (int y = 0; y < this.board.size(); y++) {
+			if (pointFound) {
+				if (this.board.get(y).get(index).getFinalRepr() == ")") {
+					pointFound = false;
+				} else {
+					BoardEntity bE = this.getEntity(index, y);
+					Laser l = new Laser(index, y, this, "");
+					l.WrapBe(bE);
+					this.addEntity(l);
+					continue;
+				}
+			} else {
+				for (int x = 0; x < this.board.get(y).size(); x++) {
+					if (this.board.get(y).get(x).getFinalRepr() == "(") {
+						index = x;
+						pointFound = true;
+					}
+				}
+			}
+		}
+	}
+
+	public void parseHorizontalLaserPoints() {
+		// replaces noLocation objects horizontally between laser markers [ ] with laser
+		// objects
+		Boolean pointFound = false;
+		for (int y = 0; y < this.board.size(); y++) {
+			for (int x = 0; x < this.board.get(y).size(); x++) {
+				BoardEntity bE = this.getEntity(x, y);
+				if (!pointFound) {
+					if (bE.getFinalRepr() == "[") {
+						pointFound = true;
+					}
+				} else {
+					if (bE.getFinalRepr() == "]") {
+						pointFound = false;
+					} else {
+						Laser l = new Laser(x, y, this, "");
+						l.WrapBe(bE); // wrap original Board entity
+						this.addEntity(l);
+					}
+				}
+			}
+		}
 	}
 
 	private void addEntity(BoardEntity bE) {
 		this.board.get(bE.getY()).set(bE.getX(), bE);
+		
+	}
+	
+	private BoardEntity getEntity(int x, int y) {
+		return this.board.get(y).get(x);
 	}
 
 	public Player checkPlayerAtLocation(int x, int y) {
@@ -137,6 +204,7 @@ public class Board {
 			}
 		}
 		return null;
+		
 	}
 
 	public void pushPlayer(Player player, String direction) {
@@ -166,14 +234,17 @@ public class Board {
 		bE.actOnEntry(player, prevBe); // call bE action
 
 		return bE; // returns board entity player is on-top of
+
 	}
 
 	public ArrayList<ArrayList<BoardEntity>> getBoard() {
 		return this.board;
+
 	}
 
 	public ArrayList<Player> getPlayers() {
 		return this.players;
+
 	}
 
 	@Override

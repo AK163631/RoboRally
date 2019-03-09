@@ -47,6 +47,10 @@ public abstract class BoardEntity {
 	public String getFinalRepr() {
 		return finalRepr;
 	}
+	
+	public void setFinalRepr(String repr) {
+		this.finalRepr = repr;
+	}
 
 	public Board getBoard() {
 		return board;

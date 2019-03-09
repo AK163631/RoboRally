@@ -32,6 +32,15 @@ public class Player {
 		this.repr = repr;
 		this.board = board;
 	}
+	
+	public void decreaseHealth(int factor) {
+		this.health -= factor;
+		
+		if(this.health <= 0) {
+			// player must have died
+			this.restPlayer();
+		}
+	}
 
 	public void fireLaser() {
 		// fires laser
