@@ -8,8 +8,8 @@ public class Board {
 
 	private ArrayList<ArrayList<BoardEntity>> board = new ArrayList<ArrayList<BoardEntity>>();
 	private ArrayList<Player> players = new ArrayList<>();
+	private ArrayList<Flag> flags = new ArrayList<Flag>(); // stores list of flags
 	private int xLen;
-	
 
 	private int yLen;
 
@@ -95,15 +95,19 @@ public class Board {
 					break;
 				case "1":
 					bE = new Flag(x, y - 1, this, "1");
+					flags.add((Flag) bE);
 					break;
 				case "2":
 					bE = new Flag(x, y - 1, this, "2");
+					flags.add((Flag) bE);
 					break;
 				case "3":
 					bE = new Flag(x, y - 1, this, "3");
+					flags.add((Flag) bE);
 					break;
 				case "4":
 					bE = new Flag(x, y - 1, this, "4");
+					flags.add((Flag) bE);
 					break;
 
 				case "x":
@@ -131,7 +135,7 @@ public class Board {
 			}
 
 		}
-		
+
 		this.parseVerticalLaserPoints();
 		this.parseHorizontalLaserPoints();
 
@@ -190,9 +194,9 @@ public class Board {
 
 	private void addEntity(BoardEntity bE) {
 		this.board.get(bE.getY()).set(bE.getX(), bE);
-		
+
 	}
-	
+
 	private BoardEntity getEntity(int x, int y) {
 		return this.board.get(y).get(x);
 	}
@@ -206,7 +210,7 @@ public class Board {
 			}
 		}
 		return null;
-		
+
 	}
 
 	public void pushPlayer(Player player, String direction) {
@@ -248,13 +252,17 @@ public class Board {
 		return this.players;
 
 	}
-	
+
 	public int getxLen() {
 		return xLen;
 	}
 
 	public int getyLen() {
 		return yLen;
+	}
+
+	public ArrayList<Flag> getFlags() {
+		return this.flags;
 	}
 
 	@Override

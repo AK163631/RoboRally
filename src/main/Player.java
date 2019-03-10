@@ -16,7 +16,6 @@ public class Player {
 	private ArrayList<Flag> flags = new ArrayList<Flag>();
 	private BoardEntity prevEntity;
 	public BoardEntity onTopOf;
-	
 
 	private int directionIndex = 0;
 	private int health = 5; // not used yet
@@ -45,19 +44,41 @@ public class Player {
 			this.restPlayer();
 		}
 	}
-	
+
+	public boolean checkWin() {
+		// checks is play flag list is equal to list of all flags on the board
+		return this.flags.equals(this.board.getFlags());
+	}
+
 	public void addFlag(Flag flag) {
-		// checks if flag is in correct order
-		// adds if is
-		// ignores other wise
+		// adds flag to flags if in correct order
+		// otherwise ignores
+
+		// is not flags collected
+		if (this.flags.size() == 0) {
+
+			// if flag is 1 i.e. the first flag
+			if (flag.getValue() == 1) {
+
+				// adds first flag
+				this.flags.add(flag);
+			}
+
+		}
+
+		// check is flag is one greater then the last flag added
+		else if (flag.getValue() == this.flags.get(this.flags.size() - 1).getValue() + 1) {
+			this.flags.add(flag);
+		}
+
 	}
 
 	public void fireLaser() {
 		// function needs optimisation
-		
+
 		// resolves first player in front of player
 		// decreases its health by one
-		
+
 		String dir = this.getDirection();
 
 		if (dir == "N") {
@@ -70,7 +91,7 @@ public class Player {
 			}
 
 		} else if (dir == "E") {
-			for (int i = 1; i + this.x  < this.board.getxLen(); i++) {
+			for (int i = 1; i + this.x < this.board.getxLen(); i++) {
 				Player p = this.board.checkPlayerAtLocation(this.x + i, this.y);
 				if (p != null) {
 					p.decreaseHealth(1);
@@ -97,7 +118,7 @@ public class Player {
 			}
 
 		}
-		// fires laser
+
 	}
 
 	public void activateEntity() {
@@ -245,7 +266,7 @@ public class Player {
 			return this.directions.get(this.directionIndex % this.directions.size());
 		}
 	}
-	
+
 	public BoardEntity getOnTopOf() {
 		return onTopOf;
 	}
@@ -253,6 +274,7 @@ public class Player {
 	@Override
 	public String toString() {
 		return this.getName() + " " + this.getRepr() + " " + this.getDirection() + " "
-				+ Arrays.toString(this.instructions.toArray()) + " (" + this.getX() + "," + this.getY() + ") " + this.health;
+				+ Arrays.toString(this.instructions.toArray()) + " " + Arrays.toString(this.flags.toArray()) + " "
+				+ " (" + this.getX() + "," + this.getY() + ") " + this.health;
 	}
 }

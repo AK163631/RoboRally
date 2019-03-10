@@ -9,11 +9,15 @@ public class Flag extends BoardEntity {
 		super(x, y, board, repr);
 		this.number = Integer.parseInt(repr);
 	}
-	
-	
+
+	public int getValue() {
+		return this.number;
+	}
 
 	@Override
 	public void actOnEntry(Player player, BoardEntity prevEntity) {
+		// TODO clarify if this is accessed on entry or after lasers have fired
 		player.addFlag(this);
 	}
+
 }

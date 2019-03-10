@@ -21,9 +21,9 @@ public class Game {
 			this.board = new Board(new ArrayList<String>(Files.readAllLines(new File(brdPath).toPath())));
 			this.players = this.board.getPlayers();
 			this.SetupPlayers(new ArrayList<String>(Files.readAllLines(new File(prgPath).toPath())));
-		
+
 		} catch (IOException e) {
-			
+
 			System.out.println("File not found");
 			System.exit(-1); // quits game
 		}
@@ -65,10 +65,19 @@ public class Game {
 	}
 
 	public Board step() {
+		// TODO finish this function
 		// executes one instruction for each robot
+		// passes and checks execution tokens as necessary
 
-		// need to decide weather robot controls current instruction
-		// or game engine
+		// rest of the code -:
+		// TODO tighten access modifiers
+		// TODO clean up un-necessary functions
+		// TODO clean up unnecessary fields etc
+		// TODO leave function optimisation for other group members/ otherwise do my
+		// self
+		// TODO get team members to complete javadoc using in-line comments as a guide
+		// for how functions work
+
 		return null;
 	}
 
