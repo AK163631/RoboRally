@@ -90,11 +90,17 @@ public class Game {
 	}
 
 	public void activatAllPlayer() {
-		// fires laser
+
 		// activates board entities under player
 		for (Player p : this.players) {
-			p.fireLaser();
 			p.activateEntity();
+
+		}
+
+		// fires laser
+		for (Player p : this.players) {
+			p.fireLaser();
+
 		}
 	}
 
