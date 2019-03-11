@@ -85,6 +85,7 @@ public class Game {
 		// self
 		// TODO get team members to complete javadoc using in-line comments as a guide
 		// for how functions work
+		// TODO change == to .equals where appropriate - Jimmy's task
 
 		return null;
 	}

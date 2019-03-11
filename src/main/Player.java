@@ -177,6 +177,7 @@ public class Player {
 		// executes current instruction
 		this.executeInstruction(this.instructions.get(this.instructionBlockIndex).get(this.instructionIndex));
 
+		// works independent of block size and with in-consistent block sizes
 		if (this.instructionIndex >= this.instructions.get(this.instructionBlockIndex).size() - 1) {
 			if ( this.instructionBlockIndex >= this.instructions.size() - 1) {
 				// throws error when no more instructions found
@@ -184,11 +185,11 @@ public class Player {
 			}
 
 			this.instructionBlockIndex++; // move to next block
-			this.instructionIndex = 0;
+			this.instructionIndex = 0; // move to first instruction on next block
 
 		} else {
 
-			this.instructionIndex++;
+			this.instructionIndex++; // move to next instruction
 		}
 	}
 
