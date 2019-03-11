@@ -13,9 +13,10 @@ public class Flag extends BoardEntity {
 	public int getValue() {
 		return this.number;
 	}
+	
 
 	@Override
-	public void actOnEntry(Player player, BoardEntity prevEntity) {
+	public void act(Player player, BoardEntity prevEntity) {
 		// TODO clarify if this is accessed on entry or after lasers have fired
 		player.addFlag(this);
 	}

@@ -62,7 +62,6 @@ public class Game {
 				this.players.get(x).addInstruction(tokens[x]);
 			}
 		}
-		
 
 	}
 
@@ -88,6 +87,15 @@ public class Game {
 		// TODO change == to .equals where appropriate - Jimmy's task
 
 		return null;
+	}
+
+	public void activatAllPlayer() {
+		// fires laser
+		// activates board entities under player
+		for (Player p : this.players) {
+			p.fireLaser();
+			p.activateEntity();
+		}
 	}
 
 	public Player getWinner() {
