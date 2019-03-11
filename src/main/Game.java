@@ -12,8 +12,9 @@ import board.BoardEntity;
 
 public class Game {
 
-	public Board board;
+	private Board board;
 	private ArrayList<Player> players;
+	private Player winner;
 
 	public Game(String brdPath, String prgPath) {
 		// load board from file
@@ -35,7 +36,7 @@ public class Game {
 		// HashMAP -> {"Alice": ("FLFWF","RFWFL")}
 	}
 
-	public void SetupPlayers(ArrayList<String> lines) {
+	private void SetupPlayers(ArrayList<String> lines) {
 		// expects players already be initialised from board
 
 		String[] names = lines.get(1).split(" ");
@@ -61,7 +62,14 @@ public class Game {
 				this.players.get(x).addInstruction(tokens[x]);
 			}
 		}
+		
 
+	}
+
+	public Boolean hasNext() {
+		// true = game still has steps remaining there is no winner yet
+		// false = game has ended and there is a winner
+		return this.winner == null;
 	}
 
 	public Board step() {
@@ -79,6 +87,14 @@ public class Game {
 		// for how functions work
 
 		return null;
+	}
+
+	public Player getWinner() {
+		return this.winner;
+	}
+
+	public Board getBoard() {
+		return this.board;
 	}
 
 	public ArrayList<Player> getPlayers() {

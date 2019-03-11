@@ -7,6 +7,7 @@ import board.Board;
 import board.BoardEntity;
 import board.Flag;
 import board.NoLocation;
+import exceptions.NoMoreInstructionsException;
 
 public class Player {
 
@@ -16,7 +17,8 @@ public class Player {
 	private ArrayList<Flag> flags = new ArrayList<Flag>();
 	private BoardEntity prevEntity;
 	public BoardEntity onTopOf;
-
+	private int instructionIndex = 0;
+	private int instructionBlockIndex = 0;
 	private int directionIndex = 0;
 	private int health = 5; // not used yet
 	private int initalX;
@@ -81,7 +83,7 @@ public class Player {
 
 		String dir = this.getDirection();
 
-		if (dir == "N") {
+		if (dir.equals("N")) {
 			for (int i = 1; i >= this.y - i; i++) {
 				Player p = this.board.checkPlayerAtLocation(this.x, this.y - i);
 				if (p != null) {
@@ -90,7 +92,7 @@ public class Player {
 				}
 			}
 
-		} else if (dir == "E") {
+		} else if (dir.equals("E")) {
 			for (int i = 1; i + this.x < this.board.getxLen(); i++) {
 				Player p = this.board.checkPlayerAtLocation(this.x + i, this.y);
 				if (p != null) {
@@ -99,7 +101,7 @@ public class Player {
 				}
 			}
 
-		} else if (dir == "S") {
+		} else if (dir.equals("S")) {
 			for (int i = 1; this.y + i < this.board.getyLen(); i++) {
 				Player p = this.board.checkPlayerAtLocation(this.x, this.y + i);
 				if (p != null) {
@@ -108,7 +110,7 @@ public class Player {
 				}
 			}
 
-		} else if (dir == "W") {
+		} else if (dir.equals("W")) {
 			for (int i = 1; this.x - i >= 0; i++) {
 				Player p = this.board.checkPlayerAtLocation(this.x - i, this.y);
 				if (p != null) {
@@ -170,19 +172,39 @@ public class Player {
 		this.directionIndex += multiplyer;
 	}
 
+	public void step() throws NoMoreInstructionsException {
+
+		// executes current instruction
+		this.executeInstruction(this.instructions.get(this.instructionBlockIndex).get(this.instructionIndex));
+
+		if (this.instructionIndex >= this.instructions.get(this.instructionBlockIndex).size() - 1) {
+			if ( this.instructionBlockIndex >= this.instructions.size() - 1) {
+				// throws error when no more instructions found
+				throw new NoMoreInstructionsException();
+			}
+
+			this.instructionBlockIndex++; // move to next block
+			this.instructionIndex = 0;
+
+		} else {
+
+			this.instructionIndex++;
+		}
+	}
+
 	public void executeInstruction(String instruction) {
-		if (instruction == "F") {
+		if (instruction.equals("F")) {
 			this.moveForward();
-		} else if (instruction == "B") {
+		} else if (instruction.equals("B")) {
 			this.moveBackward();
 
-		} else if (instruction == "L") {
+		} else if (instruction.equals("L")) {
 			this.turnACW90(1);
 
-		} else if (instruction == "R") {
+		} else if (instruction.equals("R")) {
 			this.turnCW90(1);
 
-		} else if (instruction == "U") {
+		} else if (instruction.equals("U")) {
 			this.turnCW90(2);
 		}
 	}
@@ -275,6 +297,7 @@ public class Player {
 	public String toString() {
 		return this.getName() + " " + this.getRepr() + " " + this.getDirection() + " "
 				+ Arrays.toString(this.instructions.toArray()) + " " + Arrays.toString(this.flags.toArray()) + " "
-				+ " (" + this.getX() + "," + this.getY() + ") " + this.health;
+				+ " (" + this.getX() + "," + this.getY() + ") " + this.health + " "
+				+ this.instructions.get(this.instructionBlockIndex).get(this.instructionIndex);
 	}
 }

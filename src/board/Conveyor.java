@@ -23,13 +23,13 @@ public class Conveyor extends BoardEntity {
 	private Boolean checkPlayerInDirection(Player player) {
 		// checks if a player in target direction
 		Player p = null;
-		if (this.direction == "N") {
+		if (this.direction.equals("N")) {
 			p = this.getBoard().checkPlayerAtLocation(player.getX(), player.getY() - 1);
-		} else if (this.direction == "E") {
+		} else if (this.direction.equals("E")) {
 			p = this.getBoard().checkPlayerAtLocation(player.getX() + 1, player.getY());
-		} else if (this.direction == "S") {
+		} else if (this.direction.equals("S")) {
 			p = this.getBoard().checkPlayerAtLocation(player.getX(), player.getY() + 1);
-		} else if (this.direction == "W") {
+		} else if (this.direction.equals("W")) {
 			p = this.getBoard().checkPlayerAtLocation(player.getX() - 1, player.getY());
 		}
 		if (p == null) {
