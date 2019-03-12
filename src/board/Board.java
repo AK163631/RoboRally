@@ -1,14 +1,15 @@
 package board;
 
+import main.Player;
+
 import java.util.ArrayList;
 import java.util.Arrays;
-import main.Player;
 
 public class Board {
 
-	private ArrayList<ArrayList<BoardEntity>> board = new ArrayList<ArrayList<BoardEntity>>();
+	private ArrayList<ArrayList<BoardEntity>> board = new ArrayList<>();
 	private ArrayList<Player> players = new ArrayList<>();
-	private ArrayList<Flag> flags = new ArrayList<Flag>(); // stores list of flags
+	private ArrayList<Flag> flags = new ArrayList<>(); // stores list of flags
 	private int xLen;
 
 	private int yLen;
@@ -21,7 +22,7 @@ public class Board {
 
 		// build empty board
 		for (int y = 0; y < yLen; y++) {
-			board.add(new ArrayList<BoardEntity>());
+			board.add(new ArrayList<>());
 			for (int x = 0; x < xLen; x++) {
 				board.get(y).add(null);
 			}
@@ -35,106 +36,106 @@ public class Board {
 
 				BoardEntity bE;
 				switch (tokens[x]) {
-				case "A":
-					// TODO clean up/re-structure case statements
-					
-					bE = new NoLocation(x, y - 1, this, ".");
-					this.addEntity(bE); // needed for player
-					this.players.add(new Player(x, y - 1, this, "A"));
-					continue;
-				case "B":
-					bE = new NoLocation(x, y - 1, this, ".");
-					this.addEntity(bE);
-					this.players.add(new Player(x, y - 1, this, "B"));
-					continue;
-				case "C":
-					bE = new NoLocation(x, y - 1, this, ".");
-					this.addEntity(bE);
-					this.players.add(new Player(x, y - 1, this, "C"));
-					continue;
-				case "D":
-					bE = new NoLocation(x, y - 1, this, ".");
-					this.addEntity(bE);
-					this.players.add(new Player(x, y - 1, this, "D"));
-					continue;
-				case "+":
-					bE = new Gears(x, y - 1, this, "+");
-					break;
-				case "-":
-					bE = new Gears(x, y - 1, this, "-");
-					break;
-				case "v":
-					bE = new Conveyor(x, y - 1, this, "v", "S");
-					break;
-				case "<":
-					bE = new Conveyor(x, y - 1, this, "<", "W");
-					break;
-				case ">":
-					bE = new Conveyor(x, y - 1, this, ">", "E");
-					break;
-				case "^":
-					bE = new Conveyor(x, y - 1, this, "^", "N");
-					break;
-				case "N":
-					bE = new CornerConveyor(x, y - 1, this, "N");
-					break;
-				case "E":
-					bE = new CornerConveyor(x, y - 1, this, "E");
-					break;
-				case "S":
-					bE = new CornerConveyor(x, y - 1, this, "S");
-					break;
-				case "W":
-					bE = new CornerConveyor(x, y - 1, this, "W");
-					break;
-				case "n":
-					bE = new CornerConveyor(x, y - 1, this, "n");
-					break;
-				case "e":
-					bE = new CornerConveyor(x, y - 1, this, "e");
-					break;
-				case "s":
-					bE = new CornerConveyor(x, y - 1, this, "s");
-					break;
-				case "w":
-					bE = new CornerConveyor(x, y - 1, this, "w");
-					break;
-				case "1":
-					bE = new Flag(x, y - 1, this, "1");
-					flags.add((Flag) bE);
-					break;
-				case "2":
-					bE = new Flag(x, y - 1, this, "2");
-					flags.add((Flag) bE);
-					break;
-				case "3":
-					bE = new Flag(x, y - 1, this, "3");
-					flags.add((Flag) bE);
-					break;
-				case "4":
-					bE = new Flag(x, y - 1, this, "4");
-					flags.add((Flag) bE);
-					break;
+					case "A":
+						// TODO clean up/re-structure case statements
 
-				case "x":
-					bE = new Pit(x, y - 1, this, "x");
-					break;
+						bE = new NoLocation(x, y - 1, this, ".");
+						this.addEntity(bE); // needed for player
+						this.players.add(new Player(x, y - 1, this, "A"));
+						continue;
+					case "B":
+						bE = new NoLocation(x, y - 1, this, ".");
+						this.addEntity(bE);
+						this.players.add(new Player(x, y - 1, this, "B"));
+						continue;
+					case "C":
+						bE = new NoLocation(x, y - 1, this, ".");
+						this.addEntity(bE);
+						this.players.add(new Player(x, y - 1, this, "C"));
+						continue;
+					case "D":
+						bE = new NoLocation(x, y - 1, this, ".");
+						this.addEntity(bE);
+						this.players.add(new Player(x, y - 1, this, "D"));
+						continue;
+					case "+":
+						bE = new Gears(x, y - 1, this, "+");
+						break;
+					case "-":
+						bE = new Gears(x, y - 1, this, "-");
+						break;
+					case "v":
+						bE = new Conveyor(x, y - 1, this, "v", "S");
+						break;
+					case "<":
+						bE = new Conveyor(x, y - 1, this, "<", "W");
+						break;
+					case ">":
+						bE = new Conveyor(x, y - 1, this, ">", "E");
+						break;
+					case "^":
+						bE = new Conveyor(x, y - 1, this, "^", "N");
+						break;
+					case "N":
+						bE = new CornerConveyor(x, y - 1, this, "N");
+						break;
+					case "E":
+						bE = new CornerConveyor(x, y - 1, this, "E");
+						break;
+					case "S":
+						bE = new CornerConveyor(x, y - 1, this, "S");
+						break;
+					case "W":
+						bE = new CornerConveyor(x, y - 1, this, "W");
+						break;
+					case "n":
+						bE = new CornerConveyor(x, y - 1, this, "n");
+						break;
+					case "e":
+						bE = new CornerConveyor(x, y - 1, this, "e");
+						break;
+					case "s":
+						bE = new CornerConveyor(x, y - 1, this, "s");
+						break;
+					case "w":
+						bE = new CornerConveyor(x, y - 1, this, "w");
+						break;
+					case "1":
+						bE = new Flag(x, y - 1, this, "1");
+						flags.add((Flag) bE);
+						break;
+					case "2":
+						bE = new Flag(x, y - 1, this, "2");
+						flags.add((Flag) bE);
+						break;
+					case "3":
+						bE = new Flag(x, y - 1, this, "3");
+						flags.add((Flag) bE);
+						break;
+					case "4":
+						bE = new Flag(x, y - 1, this, "4");
+						flags.add((Flag) bE);
+						break;
 
-				case "[":
-					bE = new LaserMarker(x, y - 1, this, "[");
-					break;
-				case "]":
-					bE = new LaserMarker(x, y - 1, this, "]");
-					break;
-				case "(":
-					bE = new LaserMarker(x, y - 1, this, "(");
-					break;
-				case ")":
-					bE = new LaserMarker(x, y - 1, this, ")");
-					break;
+					case "x":
+						bE = new Pit(x, y - 1, this, "x");
+						break;
 
-				default:
-					bE = new NoLocation(x, y - 1, this, ".");
+					case "[":
+						bE = new LaserMarker(x, y - 1, this, "[");
+						break;
+					case "]":
+						bE = new LaserMarker(x, y - 1, this, "]");
+						break;
+					case "(":
+						bE = new LaserMarker(x, y - 1, this, "(");
+						break;
+					case ")":
+						bE = new LaserMarker(x, y - 1, this, ")");
+						break;
+
+					default:
+						bE = new NoLocation(x, y - 1, this, ".");
 				}
 
 				this.addEntity(bE);
@@ -147,25 +148,24 @@ public class Board {
 
 	}
 
-	public void parseVerticalLaserPoints() {
+	private void parseVerticalLaserPoints() {
 		// replaces noLocation objects vertically between laser markers ( ) with laser
 		// objects
-		Boolean pointFound = false;
+		boolean pointFound = false;
 		int index = 0;
 		for (int y = 0; y < this.board.size(); y++) {
 			if (pointFound) {
-				if (this.board.get(y).get(index).getFinalRepr() == ")") {
+				if (this.getEntity(index, y).getFinalRepr().equals(")")) {
 					pointFound = false;
 				} else {
 					BoardEntity bE = this.getEntity(index, y);
 					Laser l = new Laser(index, y, this, "");
 					l.WrapBe(bE);
 					this.addEntity(l);
-					continue;
 				}
 			} else {
 				for (int x = 0; x < this.board.get(y).size(); x++) {
-					if (this.board.get(y).get(x).getFinalRepr() == "(") {
+					if (this.getEntity(x, y).getFinalRepr().equals("(")) {
 						index = x;
 						pointFound = true;
 					}
@@ -174,19 +174,19 @@ public class Board {
 		}
 	}
 
-	public void parseHorizontalLaserPoints() {
+	private void parseHorizontalLaserPoints() {
 		// replaces noLocation objects horizontally between laser markers [ ] with laser
 		// objects
-		Boolean pointFound = false;
+		boolean pointFound = false;
 		for (int y = 0; y < this.board.size(); y++) {
 			for (int x = 0; x < this.board.get(y).size(); x++) {
 				BoardEntity bE = this.getEntity(x, y);
 				if (!pointFound) {
-					if (bE.getFinalRepr() == "[") {
+					if (bE.getFinalRepr().equals("[")) {
 						pointFound = true;
 					}
 				} else {
-					if (bE.getFinalRepr() == "]") {
+					if (bE.getFinalRepr().equals("]")) {
 						pointFound = false;
 					} else {
 						Laser l = new Laser(x, y, this, "");
@@ -219,7 +219,7 @@ public class Board {
 
 	}
 
-	public void pushPlayer(Player player, String direction) {
+	private void pushPlayer(Player player, String direction) {
 		String originalDirection = player.getDirection(); // resets direction
 		player.setDirection(direction);
 		player.moveForward(); // in-direct recursive call to placePlayer
@@ -234,10 +234,10 @@ public class Board {
 			this.pushPlayer(p, player.getDirection());
 		}
 
-		BoardEntity prevBe = this.board.get(player.getY()).get(player.getX());
+		BoardEntity prevBe = this.getEntity(player.getX(), player.getY());
 		prevBe.RestorRepr(); // Restores original representation of previous location
 
-		BoardEntity bE = this.board.get(y).get(x);
+		BoardEntity bE = this.getEntity(x, y);
 		bE.setRepr(player.getRepr()); // set new representation
 
 		player.setLocation(x, y); // set new location of player
@@ -259,11 +259,11 @@ public class Board {
 
 	}
 
-	public int getxLen() {
+	public int getXLen() {
 		return xLen;
 	}
 
-	public int getyLen() {
+	public int getYLen() {
 		return yLen;
 	}
 
@@ -276,7 +276,7 @@ public class Board {
 		StringBuilder sb = new StringBuilder();
 
 		for (ArrayList<BoardEntity> al : this.board) {
-			sb.append(Arrays.toString(al.toArray()) + "\n");
+			sb.append(Arrays.toString(al.toArray())).append("\n");
 		}
 		return sb.toString();
 

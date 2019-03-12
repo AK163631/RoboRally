@@ -17,15 +17,15 @@ public class Game {
 	private Player winner;
 	private boolean draw = false;
 	private int startIndex = 0;
-	private int indexOfcurrentPlayer = 0;
+	private int indexOfCurrentPlayer = 0;
 	private int iterations = 0;
 
 	public Game(String brdPath, String prgPath) {
 		// load board from file
 		try {
-			this.board = new Board(new ArrayList<String>(Files.readAllLines(new File(brdPath).toPath())));
+			this.board = new Board(new ArrayList<>(Files.readAllLines(new File(brdPath).toPath())));
 			this.players = this.board.getPlayers();
-			this.SetupPlayers(new ArrayList<String>(Files.readAllLines(new File(prgPath).toPath())));
+			this.SetupPlayers(new ArrayList<>(Files.readAllLines(new File(prgPath).toPath())));
 
 		} catch (IOException e) {
 
@@ -53,12 +53,10 @@ public class Game {
 			BoardEntity bE = this.board.getBoard().get(p.getY()).get(p.getX());
 			bE.setRepr(p.getRepr()); // sets initial repr
 		}
-		for (Player p : (ArrayList<Player>) this.players.clone()) { // should not change over iterating array
-			// removes unused players
-			if (p.getName() == null) {
-				this.players.remove(p);
-			}
-		}
+
+		// removes unused players
+		this.players.removeIf(p -> p.getName() == null);
+
 		// set initial player instructions
 		for (int i = 2; i < lines.size(); i++) {
 			String[] tokens = lines.get(i).split(" ");
@@ -105,10 +103,10 @@ public class Game {
 			this.startIndex++;
 
 			// set current index to start point 
-			this.indexOfcurrentPlayer = this.startIndex;
+			this.indexOfCurrentPlayer = this.startIndex;
 		}
 
-		Player p = this.players.get(this.indexOfcurrentPlayer % this.players.size());
+		Player p = this.players.get(this.indexOfCurrentPlayer % this.players.size());
 		try {
 			p.step();
 		} catch (NoMoreInstructionsException e) {
@@ -117,7 +115,7 @@ public class Game {
 		}
 
 
-		this.indexOfcurrentPlayer++;
+		this.indexOfCurrentPlayer++;
 		this.iterations++;
 
 		/*
@@ -129,7 +127,7 @@ public class Game {
 		 */
 	}
 
-	public void activateAllPlayers() {
+	private void activateAllPlayers() {
 
 		// activates board entities under player
 		for (Player p : this.players) {

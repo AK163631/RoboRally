@@ -1,28 +1,28 @@
 package main;
 
-import java.util.ArrayList;
-import java.util.Arrays;
-
 import board.Board;
 import board.BoardEntity;
 import board.Flag;
 import board.NoLocation;
 import exceptions.NoMoreInstructionsException;
 
+import java.util.ArrayList;
+import java.util.Arrays;
+
 public class Player {
 
-	private ArrayList<ArrayList<String>> instructions = new ArrayList<ArrayList<String>>();
-	private final ArrayList<String> directions = new ArrayList<String>(
-			Arrays.asList(new String[] { "N", "E", "S", "W" }));
-	private ArrayList<Flag> flags = new ArrayList<Flag>();
+	private ArrayList<ArrayList<String>> instructions = new ArrayList<>();
+	private final ArrayList<String> directions = new ArrayList<>(
+			Arrays.asList("N", "E", "S", "W"));
+	private ArrayList<Flag> flags = new ArrayList<>();
 	private BoardEntity prevEntity;
-	public BoardEntity onTopOf;
+	private BoardEntity onTopOf;
 	private int instructionIndex = 0;
 	private int instructionBlockIndex = 0;
 	private int directionIndex = 0;
 	private int health = 5; // not used yet
-	private int initalX;
-	private int initalY;
+	private int initialX;
+	private int initialY;
 	private int x;
 	private int y;
 	private Board board;
@@ -32,8 +32,8 @@ public class Player {
 	public Player(int x, int y, Board board, String repr) {
 		this.x = x;
 		this.y = y;
-		this.initalX = x;
-		this.initalY = y;
+		this.initialX = x;
+		this.initialY = y;
 		this.repr = repr;
 		this.board = board;
 		this.onTopOf = this.board.getEntity(x, y);
@@ -49,7 +49,7 @@ public class Player {
 	}
 
 	public boolean checkWin() {
-		
+
 		// checks is play flag list is equal to list of all flags on the board
 		return this.flags.equals(this.board.getFlags());
 	}
@@ -83,43 +83,44 @@ public class Player {
 		// resolves first player in front of player
 		// decreases its health by one
 
-		String dir = this.getDirection();
-
-		if (dir.equals("N")) {
-			for (int i = 1; i >= this.y - i; i++) {
-				Player p = this.board.checkPlayerAtLocation(this.x, this.y - i);
-				if (p != null) {
-					p.decreaseHealth(1);
-					break;
+		switch (this.getDirection()) {
+			case "N":
+				for (int i = 1; i >= this.y - i; i++) {
+					Player p = this.board.checkPlayerAtLocation(this.x, this.y - i);
+					if (p != null) {
+						p.decreaseHealth(1);
+						break;
+					}
 				}
-			}
-
-		} else if (dir.equals("E")) {
-			for (int i = 1; i + this.x < this.board.getxLen(); i++) {
-				Player p = this.board.checkPlayerAtLocation(this.x + i, this.y);
-				if (p != null) {
-					p.decreaseHealth(1);
-					break;
+				break;
+			case "E":
+				for (int i = 1; i + this.x < this.board.getXLen(); i++) {
+					Player p = this.board.checkPlayerAtLocation(this.x + i, this.y);
+					if (p != null) {
+						p.decreaseHealth(1);
+						break;
+					}
 				}
-			}
-
-		} else if (dir.equals("S")) {
-			for (int i = 1; this.y + i < this.board.getyLen(); i++) {
-				Player p = this.board.checkPlayerAtLocation(this.x, this.y + i);
-				if (p != null) {
-					p.decreaseHealth(1);
-					break;
+				break;
+			case "S":
+				for (int i = 1; this.y + i < this.board.getYLen(); i++) {
+					Player p = this.board.checkPlayerAtLocation(this.x, this.y + i);
+					if (p != null) {
+						p.decreaseHealth(1);
+						break;
+					}
 				}
-			}
-
-		} else if (dir.equals("W")) {
-			for (int i = 1; this.x - i >= 0; i++) {
-				Player p = this.board.checkPlayerAtLocation(this.x - i, this.y);
-				if (p != null) {
-					p.decreaseHealth(1);
-					break;
+				break;
+			case "W":
+				for (int i = 1; this.x - i >= 0; i++) {
+					Player p = this.board.checkPlayerAtLocation(this.x - i, this.y);
+					if (p != null) {
+						p.decreaseHealth(1);
+						break;
+					}
 				}
-			}
+				break;
+
 
 		}
 
@@ -135,16 +136,16 @@ public class Player {
 		this.health = 5;
 		this.setDirection("N");
 
-		if (this.x == this.initalX && this.y == this.initalY) {
+		if (this.x == this.initialX && this.y == this.initialY) {
 			// if already in starting position return
 			return;
 		}
 
-		int[][] locs = new int[][] { { this.initalX, this.initalY }, // initial
-				{ this.initalX, this.initalY - 1 }, // north
-				{ this.initalX + 1, this.initalY }, // east
-				{ this.initalX, this.initalY + 1 }, // south
-				{ this.initalX - 1, this.initalY } }; // west
+		int[][] locs = new int[][]{{this.initialX, this.initialY}, // initial
+				{this.initialX, this.initialY - 1}, // north
+				{this.initialX + 1, this.initialY}, // east
+				{this.initialX, this.initialY + 1}, // south
+				{this.initialX - 1, this.initialY}}; // west
 
 		for (int[] loc : locs) {
 			Player p;
@@ -157,7 +158,7 @@ public class Player {
 				// skips location
 				continue;
 			}
-			// checks if player not found and object at location is Nolocation then accepts
+			// checks if player not found and object at location is NoLocation then accepts
 			// location
 			if (p == null && bE instanceof NoLocation) {
 				this.board.placePlayer(loc[0], loc[1], this);
@@ -166,22 +167,22 @@ public class Player {
 		}
 	}
 
-	public void turnACW90(int multiplyer) {
-		this.directionIndex -= multiplyer;
+	public void turnACW90(int multiplier) {
+		this.directionIndex -= multiplier;
 	}
 
-	public void turnCW90(int multiplyer) {
-		this.directionIndex += multiplyer;
+	public void turnCW90(int multiplier) {
+		this.directionIndex += multiplier;
 	}
 
 	public void step() throws NoMoreInstructionsException {
-		
+
 		// executes current instruction
 		this.executeInstruction(this.instructions.get(this.instructionBlockIndex).get(this.instructionIndex));
 
 		// works independent of block size and with in-consistent block sizes
 		if (this.instructionIndex >= this.instructions.get(this.instructionBlockIndex).size() - 1) {
-			if ( this.instructionBlockIndex >= this.instructions.size() - 1) {
+			if (this.instructionBlockIndex >= this.instructions.size() - 1) {
 				// throws error when no more instructions found
 				throw new NoMoreInstructionsException();
 			}
@@ -195,34 +196,41 @@ public class Player {
 		}
 	}
 
-	public void executeInstruction(String instruction) {
-		if (instruction.equals("F")) {
-			this.moveForward();
-		} else if (instruction.equals("B")) {
-			this.moveBackward();
-
-		} else if (instruction.equals("L")) {
-			this.turnACW90(1);
-
-		} else if (instruction.equals("R")) {
-			this.turnCW90(1);
-
-		} else if (instruction.equals("U")) {
-			this.turnCW90(2);
+	private void executeInstruction(String instruction) {
+		switch (instruction) {
+			case "F":
+				this.moveForward();
+				break;
+			case "B":
+				this.moveBackward();
+				break;
+			case "L":
+				this.turnACW90(1);
+				break;
+			case "R":
+				this.turnCW90(1);
+				break;
+			case "U":
+				this.turnCW90(2);
+				break;
 		}
 	}
 
 	public void moveForward() {
 		try {
-			String dir = this.getDirection();
-			if (dir == "N") {
-				this.onTopOf = this.board.placePlayer(this.x, this.y - 1, this);
-			} else if (dir == "E") {
-				this.onTopOf = this.board.placePlayer(this.x + 1, this.y, this);
-			} else if (dir == "S") {
-				this.onTopOf = this.board.placePlayer(this.x, this.y + 1, this);
-			} else if (dir == "W") {
-				this.onTopOf = this.board.placePlayer(this.x - 1, this.y, this);
+			switch (this.getDirection()) {
+				case "N":
+					this.onTopOf = this.board.placePlayer(this.x, this.y - 1, this);
+					break;
+				case "E":
+					this.onTopOf = this.board.placePlayer(this.x + 1, this.y, this);
+					break;
+				case "S":
+					this.onTopOf = this.board.placePlayer(this.x, this.y + 1, this);
+					break;
+				case "W":
+					this.onTopOf = this.board.placePlayer(this.x - 1, this.y, this);
+					break;
 			}
 		} catch (IndexOutOfBoundsException e) { // needs changing to IndexOutOfBoundsException
 			// fallen of the board
@@ -231,7 +239,7 @@ public class Player {
 		}
 	}
 
-	public void moveBackward() {
+	private void moveBackward() {
 		this.turnCW90(2); // flip
 		this.moveForward();
 		this.turnCW90(2); // return to original direction
@@ -242,12 +250,6 @@ public class Player {
 		this.instructions.add(new ArrayList<String>(Arrays.asList(instruction.split(""))));
 	}
 
-	public void addInstructions(ArrayList<String> instructions) {
-		// add list of instructions to instructions
-		for (String st : instructions) {
-			this.addInstruction(st);
-		}
-	}
 
 	public void setLocation(int x, int y) {
 		this.x = x;

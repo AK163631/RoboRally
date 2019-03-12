@@ -11,7 +11,6 @@ public class Main {
 
 	public static void main(String[] args) {
 		Game g = new Game("brdFile.txt", "prgFile.txt");
-
 		System.out.println(g); // before shot
 		while (g.hasNext()) {
 			g.step();

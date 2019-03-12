@@ -12,7 +12,7 @@ public class CornerConveyor extends BoardEntity {
 
 	@Override
 	public void act(Player player, BoardEntity prevEntity) {
-		if (!Arrays.asList(new String[] { "^", "v", ">", "<" }).contains(prevEntity.getFinalRepr())) {
+		if (!Arrays.asList("^", "v", ">", "<").contains(prevEntity.getFinalRepr())) {
 			return;
 		}
 		player.setDirection(this.getFinalRepr().toUpperCase()); // sets direction of player

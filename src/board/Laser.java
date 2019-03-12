@@ -3,6 +3,7 @@ package board;
 import main.Player;
 
 public class Laser extends BoardEntity {
+	// TODO change so it only damages first player in its path
 	
 	private BoardEntity bEAtLocation;
 
@@ -18,8 +19,9 @@ public class Laser extends BoardEntity {
 			player.decreaseHealth(1); // decrease health by one 
 		}
 	}
-	
-	public void actOnENtry(Player player, BoardEntity prevEntity) {
+
+	@Override
+	public void actOnEntry(Player player, BoardEntity prevEntity) {
 		this.bEAtLocation.actOnEntry(player, prevEntity); // calls objects on entry function
 		
 	}

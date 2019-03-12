@@ -10,7 +10,7 @@ public class Gears extends BoardEntity {
 
 	@Override
 	public void act(Player player, BoardEntity prevEntity) {
-		if (this.getFinalRepr() == "+") {
+		if (this.getFinalRepr().equals("+")) {
 			player.turnCW90(1);
 		} else {
 			player.turnACW90(1);
