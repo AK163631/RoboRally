@@ -17,7 +17,6 @@ public class Flag extends BoardEntity {
 
 	@Override
 	public void act(Player player, BoardEntity prevEntity) {
-		// TODO clarify if this is accessed on entry or after lasers have fired
 		player.addFlag(this);
 	}
 

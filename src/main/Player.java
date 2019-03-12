@@ -36,6 +36,7 @@ public class Player {
 		this.initalY = y;
 		this.repr = repr;
 		this.board = board;
+		this.onTopOf = this.board.getEntity(x, y);
 	}
 
 	public void decreaseHealth(int factor) {
@@ -48,6 +49,7 @@ public class Player {
 	}
 
 	public boolean checkWin() {
+		
 		// checks is play flag list is equal to list of all flags on the board
 		return this.flags.equals(this.board.getFlags());
 	}
@@ -173,7 +175,7 @@ public class Player {
 	}
 
 	public void step() throws NoMoreInstructionsException {
-
+		
 		// executes current instruction
 		this.executeInstruction(this.instructions.get(this.instructionBlockIndex).get(this.instructionIndex));
 

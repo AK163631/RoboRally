@@ -9,12 +9,18 @@ import java.util.HashMap;
 
 import board.Board;
 import board.BoardEntity;
+import exceptions.NoMoreInstructionsException;
 
 public class Game {
 
 	private Board board;
 	private ArrayList<Player> players;
+	private ArrayList<Integer> ExecutionOrder;
 	private Player winner;
+	private boolean draw = false;
+	private int startIndex = 0;
+	private int indexOfcurrentPlayer = 0;
+	private int iterations = 0;
 
 	public Game(String brdPath, String prgPath) {
 		// load board from file
@@ -66,30 +72,66 @@ public class Game {
 	}
 
 	public Boolean hasNext() {
-		// true = game still has steps remaining there is no winner yet
-		// false = game has ended and there is a winner
-		return this.winner == null;
+		// true = game still has steps remaining there is no winner yet or no more
+		// instructions
+		// false = game has ended and there is a winner and there are still instructions
+		// to execute
+		return !this.draw;
+		// return this.winner == null | !this.draw;
+	}
+	
+
+	public void step() {
+		
+		if(!this.hasNext()) {
+			return;
+		}
+		
+		// if at end of player list
+		if (this.iterations == this.players.size()) {
+			
+			// activate player and board actions
+			this.activateAllPlayers();
+			
+			for (Player p: this.players) {
+				if(p.checkWin()) {
+					this.winner = p;
+					return;
+				}
+			}
+			
+			// rest iterations
+			this.iterations = 0;
+			
+			// add 1 to start index
+			this.startIndex++;
+			
+			// set current index to start point 
+			this.indexOfcurrentPlayer = this.startIndex;
+		}
+
+		Player p = this.players.get(this.indexOfcurrentPlayer % this.players.size());
+		try {
+			p.step();
+		} catch (NoMoreInstructionsException e) {
+			this.draw = true;
+			return;
+		}
+		
+
+		this.indexOfcurrentPlayer++;
+		this.iterations++;
+		
+		/*
+		 * 
+		 * int blocks = 5; for (int i = 0; i < blocks; i++) { // loops through all
+		 * players for (int x = i, orig = i; x < orig + this.players.size(); x++) {
+		 * Player p = this.getPlayer(x); System.out.println(p);
+		 * System.out.println(this.players.indexOf(p)); } }
+		 */
 	}
 
-	public Board step() {
-		// TODO finish this function
-		// executes one instruction for each robot
-		// passes and checks execution tokens as necessary
-
-		// rest of the code -:
-		// TODO tighten access modifiers
-		// TODO clean up un-necessary functions
-		// TODO clean up unnecessary fields etc
-		// TODO leave function optimisation for other group members/ otherwise do my
-		// self
-		// TODO get team members to complete javadoc using in-line comments as a guide
-		// for how functions work
-		// TODO change == to .equals where appropriate - Jimmy's task
-
-		return null;
-	}
-
-	public void activatAllPlayer() {
+	public void activateAllPlayers() {
 
 		// activates board entities under player
 		for (Player p : this.players) {

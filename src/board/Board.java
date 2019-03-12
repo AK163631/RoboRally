@@ -36,21 +36,27 @@ public class Board {
 				BoardEntity bE;
 				switch (tokens[x]) {
 				case "A":
+					// TODO clean up/re-structure case statements
+					
 					bE = new NoLocation(x, y - 1, this, ".");
+					this.addEntity(bE); // needed for player
 					this.players.add(new Player(x, y - 1, this, "A"));
-					break;
+					continue;
 				case "B":
 					bE = new NoLocation(x, y - 1, this, ".");
+					this.addEntity(bE);
 					this.players.add(new Player(x, y - 1, this, "B"));
-					break;
+					continue;
 				case "C":
 					bE = new NoLocation(x, y - 1, this, ".");
+					this.addEntity(bE);
 					this.players.add(new Player(x, y - 1, this, "C"));
-					break;
+					continue;
 				case "D":
 					bE = new NoLocation(x, y - 1, this, ".");
+					this.addEntity(bE);
 					this.players.add(new Player(x, y - 1, this, "D"));
-					break;
+					continue;
 				case "+":
 					bE = new Gears(x, y - 1, this, "+");
 					break;
@@ -197,7 +203,7 @@ public class Board {
 
 	}
 
-	private BoardEntity getEntity(int x, int y) {
+	public BoardEntity getEntity(int x, int y) {
 		return this.board.get(y).get(x);
 	}
 

@@ -1,4 +1,4 @@
 format 1
-Alice Bobby sarah 
-FLFWF WFWFL WWWW
-RFWFL FRWRF WWWW
+Alice Bobby 
+FLFWF WFWFL
+RFWFL FRWRF
