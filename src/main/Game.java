@@ -1,21 +1,19 @@
 package main;
 
+import board.Board;
+import board.BoardEntity;
+import exceptions.NoMoreInstructionsException;
+
 import java.io.File;
 import java.io.IOException;
 import java.nio.file.Files;
 import java.util.ArrayList;
-
 import java.util.HashMap;
-
-import board.Board;
-import board.BoardEntity;
-import exceptions.NoMoreInstructionsException;
 
 public class Game {
 
 	private Board board;
 	private ArrayList<Player> players;
-	private ArrayList<Integer> ExecutionOrder;
 	private Player winner;
 	private boolean draw = false;
 	private int startIndex = 0;
@@ -79,33 +77,33 @@ public class Game {
 		return !this.draw;
 		// return this.winner == null | !this.draw;
 	}
-	
+
 
 	public void step() {
-		
-		if(!this.hasNext()) {
+
+		if (!this.hasNext()) {
 			return;
 		}
-		
+
 		// if at end of player list
 		if (this.iterations == this.players.size()) {
-			
+
 			// activate player and board actions
 			this.activateAllPlayers();
-			
-			for (Player p: this.players) {
-				if(p.checkWin()) {
+
+			for (Player p : this.players) {
+				if (p.checkWin()) {
 					this.winner = p;
 					return;
 				}
 			}
-			
+
 			// rest iterations
 			this.iterations = 0;
-			
+
 			// add 1 to start index
 			this.startIndex++;
-			
+
 			// set current index to start point 
 			this.indexOfcurrentPlayer = this.startIndex;
 		}
@@ -117,13 +115,13 @@ public class Game {
 			this.draw = true;
 			return;
 		}
-		
+
 
 		this.indexOfcurrentPlayer++;
 		this.iterations++;
-		
+
 		/*
-		 * 
+		 *
 		 * int blocks = 5; for (int i = 0; i < blocks; i++) { // loops through all
 		 * players for (int x = i, orig = i; x < orig + this.players.size(); x++) {
 		 * Player p = this.getPlayer(x); System.out.println(p);
@@ -163,7 +161,8 @@ public class Game {
 		// game state as string
 		StringBuilder sb = new StringBuilder();
 		for (Player p : this.players) {
-			sb.append(p.toString() + "\n");
+			sb.append(p);
+			sb.append("\n");
 		}
 		sb.append(this.board.toString());
 		return sb.toString();
