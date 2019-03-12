@@ -12,15 +12,14 @@ import java.util.Arrays;
 public class Player {
 
 	private ArrayList<ArrayList<String>> instructions = new ArrayList<>();
-	private final ArrayList<String> directions = new ArrayList<>(
-			Arrays.asList("N", "E", "S", "W"));
+	private final ArrayList<String> directions = new ArrayList<>(Arrays.asList("N", "E", "S", "W"));
 	private ArrayList<Flag> flags = new ArrayList<>();
 	private BoardEntity prevEntity;
 	private BoardEntity onTopOf;
 	private int instructionIndex = 0;
 	private int instructionBlockIndex = 0;
 	private int directionIndex = 0;
-	private int health = 5; // not used yet
+	private int health = 5;
 	private int initialX;
 	private int initialY;
 	private int x;
@@ -183,6 +182,7 @@ public class Player {
 		// works independent of block size and with in-consistent block sizes
 		if (this.instructionIndex >= this.instructions.get(this.instructionBlockIndex).size() - 1) {
 			if (this.instructionBlockIndex >= this.instructions.size() - 1) {
+
 				// throws error when no more instructions found
 				throw new NoMoreInstructionsException();
 			}
@@ -247,7 +247,7 @@ public class Player {
 
 	public void addInstruction(String instruction) {
 		// add instruction block to instructions
-		this.instructions.add(new ArrayList<String>(Arrays.asList(instruction.split(""))));
+		this.instructions.add(new ArrayList<>(Arrays.asList(instruction.split(""))));
 	}
 
 
@@ -264,10 +264,7 @@ public class Player {
 		return this.y;
 	}
 
-	public void setName(String name) {
-		this.name = name;
-
-	}
+	public void setName(String name) { this.name = name; }
 
 	public String getName() {
 		return this.name;
@@ -276,6 +273,7 @@ public class Player {
 	public void setPrevEntity(BoardEntity bE) {
 		this.prevEntity = bE;
 	}
+
 
 	public String getRepr() {
 		return this.repr;

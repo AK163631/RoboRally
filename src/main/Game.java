@@ -36,6 +36,7 @@ public class Game {
 	}
 
 	public Game(HashMap<String, ArrayList<String>> playersHM, ArrayList<String> board) {
+		// TODO this function
 		// for GUI support
 		// HashMAP -> {"Alice": ("FLFWF","RFWFL")}
 	}
@@ -50,7 +51,7 @@ public class Game {
 			Player p = this.players.get(i);
 			p.setName(names[i]); // sets name
 
-			BoardEntity bE = this.board.getBoard().get(p.getY()).get(p.getX());
+			BoardEntity bE = this.board.getEntity(p.getX(), p.getY());
 			bE.setRepr(p.getRepr()); // sets initial repr
 		}
 
@@ -146,8 +147,8 @@ public class Game {
 		return this.winner;
 	}
 
-	public Board getBoard() {
-		return this.board;
+	public ArrayList<ArrayList<BoardEntity>> getBoard() {
+		return this.board.getBoard();
 	}
 
 	public ArrayList<Player> getPlayers() {
