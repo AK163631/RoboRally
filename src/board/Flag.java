@@ -5,8 +5,8 @@ import main.Player;
 public class Flag extends BoardEntity {
 	private int number;
 
-	public Flag(int x, int y, Board board, String repr) {
-		super(x, y, board, repr);
+	public Flag(int x, int y, String repr) {
+		super(x, y, repr);
 		this.number = Integer.parseInt(repr);
 	}
 

@@ -4,8 +4,8 @@ import main.Player;
 
 public class Pit extends BoardEntity{
 
-	public Pit(int x, int y, Board board, String repr) {
-		super(x, y, board, repr);
+	public Pit(int x, int y, String repr) {
+		super(x, y, repr);
 	}
 
 	@Override

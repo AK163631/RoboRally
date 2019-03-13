@@ -4,10 +4,12 @@ import main.Player;
 
 public class Conveyor extends BoardEntity {
 	private String direction; // direction it is moving
+	private Board board; // reference to the whole board
 
-	public Conveyor(int x, int y, Board board, String repr, String direction) {
-		super(x, y, board, repr); // TODO only class that uses board
+	public Conveyor(int x, int y, String repr, String direction, Board board) {
+		super(x, y, repr);
 		this.direction = direction;
+		this.board = board;
 	}
 
 	@Override
@@ -25,16 +27,16 @@ public class Conveyor extends BoardEntity {
 		Player p = null;
 		switch (this.direction) {
 			case "N":
-				p = this.getBoard().checkPlayerAtLocation(player.getX(), player.getY() - 1);
+				p = this.board.checkPlayerAtLocation(player.getX(), player.getY() - 1);
 				break;
 			case "E":
-				p = this.getBoard().checkPlayerAtLocation(player.getX() + 1, player.getY());
+				p = this.board.checkPlayerAtLocation(player.getX() + 1, player.getY());
 				break;
 			case "S":
-				p = this.getBoard().checkPlayerAtLocation(player.getX(), player.getY() + 1);
+				p = this.board.checkPlayerAtLocation(player.getX(), player.getY() + 1);
 				break;
 			case "W":
-				p = this.getBoard().checkPlayerAtLocation(player.getX() - 1, player.getY());
+				p = this.board.checkPlayerAtLocation(player.getX() - 1, player.getY());
 				break;
 		}
 		return p != null;

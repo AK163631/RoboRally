@@ -9,6 +9,7 @@ import java.io.IOException;
 import java.nio.file.Files;
 import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.List;
 
 public class Game {
 
@@ -21,36 +22,52 @@ public class Game {
 	private int iterations = 0;
 
 	public Game(String brdPath, String prgPath) {
-		// load board from file
+		// load game from file
 		try {
 			this.board = new Board(new ArrayList<>(Files.readAllLines(new File(brdPath).toPath())));
 			this.players = this.board.getPlayers();
-			this.SetupPlayers(new ArrayList<>(Files.readAllLines(new File(prgPath).toPath())));
+			List<String> lines = Files.readAllLines(new File(prgPath).toPath());
+			this.setInitialPlayerNamesRepr(lines.get(1).split(" "));
+
+			// set initial player instructions
+			for (int i = 2; i < lines.size(); i++) {
+				String[] tokens = lines.get(i).split(" ");
+				for (int x = 0; x < tokens.length; x++) {
+					this.players.get(x).addInstruction(tokens[x]);
+				}
+			}
 
 		} catch (IOException e) {
-
-			System.out.println("File not found");
+			System.err.println(e);
 			System.exit(-1); // quits game
 		}
 
 	}
 
 	public Game(HashMap<String, ArrayList<String>> playersHM, ArrayList<String> board) {
-		// TODO this function
 		// for GUI support
-		// HashMAP -> {"Alice": ("FLFWF","RFWFL")}
+		// HashMAP -> {"Alice": ("FLFWF","RFWFL")} # player stats
+		// ArrayList -> [...., ....., ....., .....] # board
+		this.board = new Board(board);
+		this.players = this.board.getPlayers();
+		this.setInitialPlayerNamesRepr((String[]) playersHM.keySet().toArray());
+
+		int count = 0;
+		for (String key : playersHM.keySet()) {
+			for (String block : playersHM.get(key)) {
+				this.players.get(count).addInstruction(block);
+			}
+			count++;
+		}
+
 	}
 
-	private void SetupPlayers(ArrayList<String> lines) {
-		// expects players already be initialised from board
+	private void setInitialPlayerNamesRepr(String[] names) {
 
-		String[] names = lines.get(1).split(" ");
-
-		// set initial player names
+		// set initial player names and repr
 		for (int i = 0; i < names.length; i++) {
 			Player p = this.players.get(i);
 			p.setName(names[i]); // sets name
-
 			BoardEntity bE = this.board.getEntity(p.getX(), p.getY());
 			bE.setRepr(p.getRepr()); // sets initial repr
 		}
@@ -58,17 +75,9 @@ public class Game {
 		// removes unused players
 		this.players.removeIf(p -> p.getName() == null);
 
-		// set initial player instructions
-		for (int i = 2; i < lines.size(); i++) {
-			String[] tokens = lines.get(i).split(" ");
-			for (int x = 0; x < tokens.length; x++) {
-				this.players.get(x).addInstruction(tokens[x]);
-			}
-		}
-
 	}
 
-	public Boolean hasNext() {
+	public boolean hasNext() {
 		// true = game still has steps remaining there is no winner yet or no more
 		// instructions
 		// false = game has ended and there is a winner and there are still instructions
@@ -88,7 +97,7 @@ public class Game {
 		if (this.iterations == this.players.size()) {
 
 			// activate player and board actions
-			this.activateAllPlayers();
+			this.activateAllActions();
 
 			for (Player p : this.players) {
 				if (p.checkWin()) {
@@ -115,26 +124,19 @@ public class Game {
 			return;
 		}
 
-
 		this.indexOfCurrentPlayer++;
 		this.iterations++;
-
-		/*
-		 *
-		 * int blocks = 5; for (int i = 0; i < blocks; i++) { // loops through all
-		 * players for (int x = i, orig = i; x < orig + this.players.size(); x++) {
-		 * Player p = this.getPlayer(x); System.out.println(p);
-		 * System.out.println(this.players.indexOf(p)); } }
-		 */
 	}
 
-	private void activateAllPlayers() {
+	private void activateAllActions() {
 
 		// activates board entities under player
 		for (Player p : this.players) {
 			p.activateEntity();
 
 		}
+
+		this.board.activateLasers(); // board activates laser
 
 		// fires laser
 		for (Player p : this.players) {

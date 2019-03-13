@@ -4,8 +4,8 @@ import main.Player;
 
 public class Gears extends BoardEntity {
 
-	public Gears(int x, int y, Board board, String repr) {
-		super(x, y, board, repr);
+	public Gears(int x, int y, String repr) {
+		super(x, y, repr);
 	}
 
 	@Override

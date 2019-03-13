@@ -6,8 +6,8 @@ import main.Player;
 
 public class CornerConveyor extends BoardEntity {
 
-	public CornerConveyor(int x, int y, Board board, String repr) {
-		super(x, y, board, repr);
+	public CornerConveyor(int x, int y, String repr) {
+		super(x, y, repr);
 	}
 
 	@Override

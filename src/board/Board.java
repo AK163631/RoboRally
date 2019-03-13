@@ -37,105 +37,103 @@ public class Board {
 				BoardEntity bE;
 				switch (tokens[x]) {
 					case "A":
-						// TODO clean up/re-structure case statements
-
-						bE = new NoLocation(x, y - 1, this, ".");
+						bE = new NoLocation(x, y - 1, ".");
 						this.addEntity(bE); // needed for player
 						this.players.add(new Player(x, y - 1, this, "A"));
 						continue;
 					case "B":
-						bE = new NoLocation(x, y - 1, this, ".");
+						bE = new NoLocation(x, y - 1, ".");
 						this.addEntity(bE);
 						this.players.add(new Player(x, y - 1, this, "B"));
 						continue;
 					case "C":
-						bE = new NoLocation(x, y - 1, this, ".");
+						bE = new NoLocation(x, y - 1, ".");
 						this.addEntity(bE);
 						this.players.add(new Player(x, y - 1, this, "C"));
 						continue;
 					case "D":
-						bE = new NoLocation(x, y - 1, this, ".");
+						bE = new NoLocation(x, y - 1, ".");
 						this.addEntity(bE);
 						this.players.add(new Player(x, y - 1, this, "D"));
 						continue;
 					case "+":
-						bE = new Gears(x, y - 1, this, "+");
+						bE = new Gears(x, y - 1, "+");
 						break;
 					case "-":
-						bE = new Gears(x, y - 1, this, "-");
+						bE = new Gears(x, y - 1, "-");
 						break;
 					case "v":
-						bE = new Conveyor(x, y - 1, this, "v", "S");
+						bE = new Conveyor(x, y - 1, "S", "v", this);
 						break;
 					case "<":
-						bE = new Conveyor(x, y - 1, this, "<", "W");
+						bE = new Conveyor(x, y - 1, "W", "<", this);
 						break;
 					case ">":
-						bE = new Conveyor(x, y - 1, this, ">", "E");
+						bE = new Conveyor(x, y - 1, "E", ">", this);
 						break;
 					case "^":
-						bE = new Conveyor(x, y - 1, this, "^", "N");
+						bE = new Conveyor(x, y - 1, "N", "^", this);
 						break;
 					case "N":
-						bE = new CornerConveyor(x, y - 1, this, "N");
+						bE = new CornerConveyor(x, y - 1, "N");
 						break;
 					case "E":
-						bE = new CornerConveyor(x, y - 1, this, "E");
+						bE = new CornerConveyor(x, y - 1, "E");
 						break;
 					case "S":
-						bE = new CornerConveyor(x, y - 1, this, "S");
+						bE = new CornerConveyor(x, y - 1, "S");
 						break;
 					case "W":
-						bE = new CornerConveyor(x, y - 1, this, "W");
+						bE = new CornerConveyor(x, y - 1, "W");
 						break;
 					case "n":
-						bE = new CornerConveyor(x, y - 1, this, "n");
+						bE = new CornerConveyor(x, y - 1, "n");
 						break;
 					case "e":
-						bE = new CornerConveyor(x, y - 1, this, "e");
+						bE = new CornerConveyor(x, y - 1, "e");
 						break;
 					case "s":
-						bE = new CornerConveyor(x, y - 1, this, "s");
+						bE = new CornerConveyor(x, y - 1, "s");
 						break;
 					case "w":
-						bE = new CornerConveyor(x, y - 1, this, "w");
+						bE = new CornerConveyor(x, y - 1, "w");
 						break;
 					case "1":
-						bE = new Flag(x, y - 1, this, "1");
+						bE = new Flag(x, y - 1, "1");
 						flags.add((Flag) bE);
 						break;
 					case "2":
-						bE = new Flag(x, y - 1, this, "2");
+						bE = new Flag(x, y - 1, "2");
 						flags.add((Flag) bE);
 						break;
 					case "3":
-						bE = new Flag(x, y - 1, this, "3");
+						bE = new Flag(x, y - 1, "3");
 						flags.add((Flag) bE);
 						break;
 					case "4":
-						bE = new Flag(x, y - 1, this, "4");
+						bE = new Flag(x, y - 1, "4");
 						flags.add((Flag) bE);
 						break;
 
 					case "x":
-						bE = new Pit(x, y - 1, this, "x");
+						bE = new Pit(x, y - 1, "x");
 						break;
 
 					case "[":
-						bE = new LaserMarker(x, y - 1, this, "[");
+						bE = new LaserMarker(x, y - 1, "[");
 						break;
 					case "]":
-						bE = new LaserMarker(x, y - 1, this, "]");
+						bE = new LaserMarker(x, y - 1, "]");
 						break;
 					case "(":
-						bE = new LaserMarker(x, y - 1, this, "(");
+						bE = new LaserMarker(x, y - 1, "(");
 						break;
 					case ")":
-						bE = new LaserMarker(x, y - 1, this, ")");
+						bE = new LaserMarker(x, y - 1, ")");
 						break;
 
 					default:
-						bE = new NoLocation(x, y - 1, this, ".");
+						bE = new NoLocation(x, y - 1, ".");
 				}
 
 				this.addEntity(bE);
@@ -143,14 +141,11 @@ public class Board {
 
 		}
 
-		this.parseVerticalLaserPoints();
-		this.parseHorizontalLaserPoints();
-
 	}
 
-	private void parseVerticalLaserPoints() {
-		// replaces noLocation objects vertically between laser markers ( ) with laser
-		// objects
+	private Player findPlayerInVerticalLasers() {
+		// ( -> ) finds first player in laser path and returns
+		// if non found returns null
 		boolean pointFound = false;
 		int index = 0;
 		for (int y = 0; y < this.board.size(); y++) {
@@ -158,10 +153,11 @@ public class Board {
 				if (this.getEntity(index, y).getFinalRepr().equals(")")) {
 					pointFound = false;
 				} else {
-					BoardEntity bE = this.getEntity(index, y);
-					Laser l = new Laser(index, y, this, "");
-					l.WrapBe(bE);
-					this.addEntity(l);
+					// check player here
+					Player p = this.checkPlayerAtLocation(index, y);
+					if (p != null) {
+						return p;
+					}
 				}
 			} else {
 				for (int x = 0; x < this.board.get(y).size(); x++) {
@@ -172,11 +168,12 @@ public class Board {
 				}
 			}
 		}
+		return null; // no players in laser
 	}
 
-	private void parseHorizontalLaserPoints() {
-		// replaces noLocation objects horizontally between laser markers [ ] with laser
-		// objects
+	private Player findPlayerInHorizontalLasers() {
+		// [ -> ] finds first player in laser path and returns
+		// if non found returns null
 		boolean pointFound = false;
 		for (int y = 0; y < this.board.size(); y++) {
 			for (int x = 0; x < this.board.get(y).size(); x++) {
@@ -189,13 +186,16 @@ public class Board {
 					if (bE.getFinalRepr().equals("]")) {
 						pointFound = false;
 					} else {
-						Laser l = new Laser(x, y, this, "");
-						l.WrapBe(bE); // wrap original Board entity
-						this.addEntity(l);
+						// check player here
+						Player p = this.checkPlayerAtLocation(x, y);
+						if (p != null) {
+							return p;
+						}
 					}
 				}
 			}
 		}
+		return null; // no players in laser
 	}
 
 	private void addEntity(BoardEntity bE) {
@@ -216,7 +216,6 @@ public class Board {
 			}
 		}
 		return null;
-
 	}
 
 	private void pushPlayer(Player player, String direction) {
@@ -257,6 +256,15 @@ public class Board {
 	public ArrayList<Player> getPlayers() {
 		return this.players;
 
+	}
+
+	public void activateLasers() {
+		// fires laser in both horizontal and vertical
+		for (Player p : Arrays.asList(this.findPlayerInHorizontalLasers(), this.findPlayerInVerticalLasers())) {
+			if (p != null) {
+				p.decreaseHealth(1); // take one of health
+			}
+		}
 	}
 
 	public int getXLen() {

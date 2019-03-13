@@ -8,12 +8,10 @@ public abstract class BoardEntity {
 	private int y;
 	private String finalRepr;
 	private String repr;
-	private Board board; // internal reference to board
 
-	public BoardEntity(int x, int y, Board board, String repr) {
+	public BoardEntity(int x, int y, String repr) {
 		this.x = x;
 		this.y = y;
-		this.board = board;
 		this.repr = repr;
 		this.finalRepr = repr;
 	}
@@ -46,14 +44,6 @@ public abstract class BoardEntity {
 
 	public String getFinalRepr() {
 		return finalRepr;
-	}
-	
-	public void setFinalRepr(String repr) {
-		this.finalRepr = repr;
-	}
-
-	public Board getBoard() {
-		return board;
 	}
 
 	@Override
