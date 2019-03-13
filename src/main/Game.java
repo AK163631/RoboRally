@@ -38,7 +38,7 @@ public class Game {
 			}
 
 		} catch (IOException e) {
-			System.err.println(e);
+			System.err.println(e.toString());
 			System.exit(-1); // quits game
 		}
 
