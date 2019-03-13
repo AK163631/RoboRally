@@ -2,8 +2,8 @@
 RoboRally Source
 ## TODO's  
  - Tighten access modifiers - mostly done  
- - Leave function optimisation for other group members/ otherwise do my self - partly done  
- - Get team members to complete javadoc using in-line comments as a guide for how functions work  
+ - Leave function optimisation for other team members otherwise do my self - partly done  
+ - Team members to complete javadoc using in-line comments as a guide for how functions work  
  - Error handling for invalid brd or prg files - in progress  
 
 ## Usage 
