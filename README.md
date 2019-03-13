@@ -1,13 +1,15 @@
 # RoboRally
 RoboRally Source
-## TODO's  
+## TODO's For Asad
  - Tighten access modifiers - mostly done  
- - Leave function optimisation for other team members otherwise do my self - partly done  
- - Team members to complete javadoc using in-line comments as a guide for how functions work  
- - Error handling for invalid brd or prg files - in progress  
+ - function optimisation - partly done  
+ - Error handling for invalid brd or prg files - in progress 
+
+## TODO's For The Team
+ - Complete javadoc using in-line comments as a guide for how functions work 
+ - Complete unit tests using junit jupiter 
 
 ## Usage 
-
 This is a basic idea of how the ```Game``` class should be used in the GUI.
 ```java
 // Create game object with either paths to the brd file and prg file
