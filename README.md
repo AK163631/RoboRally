@@ -1,9 +1,9 @@
 # RoboRally
 RoboRally Source
 ## TODO's For Asad
-### Docs Related Tasks
+### Docs
  - Start on the degsin
-### Code Related Tasks
+### Code
  - Tighten access modifiers - mostly done  
  - function optimisation - partly done  
  - Error handling for invalid brd or prg files - in progress 
