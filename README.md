@@ -2,14 +2,14 @@
 RoboRally Source
 ## TODO's For Asad
 ### Docs
- - Start on the degsin
+ - Start on the design
 ### Code
  - Tighten access modifiers - mostly done  
  - function optimisation - partly done  
  - Error handling for invalid brd or prg files - in progress 
  
  ## TODOS's For Rob
- - The God Damn GUI that seems to be taking forver for him to start on. Wonder why? 
+ - The God Damn GUI that seems to be taking forever for him to start on. Wonder why?
 
 ## TODO's For The Rest Of Team
  - Complete javadoc using in-line comments as a guide for how functions work 
@@ -44,7 +44,7 @@ while (g.hasNext()) { // while game has further steps
 
 // game has finished as there are no more steps (g.hasNext() = false)
 
-Player winner = g.getWinner(); // retrive winner
+Player winner = g.getWinner(); // retrieve winner
 
 if (winner == null) {
     /*
