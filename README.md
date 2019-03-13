@@ -4,8 +4,11 @@ RoboRally Source
  - Tighten access modifiers - mostly done  
  - function optimisation - partly done  
  - Error handling for invalid brd or prg files - in progress 
+ 
+ ## TODOS's For Rob
+ - The God Damn GUI that seems to be taking forver for him to start on. Wonder why? 
 
-## TODO's For The Team
+## TODO's For The Rest Of Team
  - Complete javadoc using in-line comments as a guide for how functions work 
  - Complete unit tests using junit jupiter 
 
