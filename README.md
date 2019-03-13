@@ -1,6 +1,9 @@
 # RoboRally
 RoboRally Source
 ## TODO's For Asad
+### Docs
+ - Start on the degsin
+### Code
  - Tighten access modifiers - mostly done  
  - function optimisation - partly done  
  - Error handling for invalid brd or prg files - in progress 
@@ -11,6 +14,7 @@ RoboRally Source
 ## TODO's For The Rest Of Team
  - Complete javadoc using in-line comments as a guide for how functions work 
  - Complete unit tests using junit jupiter 
+ - Make a UML diagram from  the code 
 
 ## Usage 
 This is a basic idea of how the ```Game``` class should be used in the GUI.
