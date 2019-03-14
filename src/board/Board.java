@@ -1,9 +1,11 @@
 package board;
 
+import exceptions.InvalidBoardException;
 import main.Player;
 
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.List;
 
 public class Board {
 
@@ -11,14 +13,17 @@ public class Board {
 	private ArrayList<Player> players = new ArrayList<>();
 	private ArrayList<Flag> flags = new ArrayList<>(); // stores list of flags
 	private int xLen;
-
 	private int yLen;
 
-	public Board(ArrayList<String> lines) {
+	public Board(ArrayList<String> lines) throws InvalidBoardException {
 		// set up board
 
 		this.xLen = lines.get(1).replaceAll(" ", "").length();
 		this.yLen = lines.size() - 1;
+
+		// validates board
+		// expects xLen to be set
+		this.validateBoard(lines.subList(1, lines.size() - 1));
 
 		// build empty board
 		for (int y = 0; y < yLen; y++) {
@@ -143,6 +148,16 @@ public class Board {
 
 	}
 
+	private void validateBoard(List<String> lines) throws InvalidBoardException {
+		for (String line : lines) {
+			// checks all x lengths are consistent
+			if (line.replaceAll(" ", "").length() != this.getXLen()) {
+				throw new InvalidBoardException();
+			}
+		}
+
+	}
+
 	private Player findPlayerInVerticalLasers() {
 		// ( -> ) finds first player in laser path and returns
 		// if non found returns null
@@ -170,6 +185,8 @@ public class Board {
 		}
 		return null; // no players in laser
 	}
+
+
 
 	private Player findPlayerInHorizontalLasers() {
 		// [ -> ] finds first player in laser path and returns
