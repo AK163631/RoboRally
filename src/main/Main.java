@@ -1,5 +1,7 @@
 package main;
 
+import exceptions.InvalidBoardException;
+
 public class Main {
 	// TODO tighten access modifiers - mostly done
 	// TODO leave function optimisation for other group members/ otherwise do my self
@@ -8,7 +10,17 @@ public class Main {
 
 	// example usage of game class
 	public static void main(String[] args) {
-		Game g = new Game("brdFile.txt", "prgFile.txt");
+		Game g = null;
+		try {
+
+			g = new Game("brdFile.txt", "prgFile.txt");
+
+		} catch (InvalidBoardException e) {
+
+			System.out.println(e.toString());
+			System.exit(-1);
+		}
+
 		System.out.println(g); // before shot
 
 		while (g.hasNext()) {

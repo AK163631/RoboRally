@@ -1,9 +1,9 @@
 package exceptions;
 
-public class InvalidBoardFileException extends Exception {
+public class InvalidBoardException extends Exception {
 
 	// thrown is board file is in an invalid format or erroneous
-	public InvalidBoardFileException() {
+	public InvalidBoardException() {
 		super();
 	}
 }

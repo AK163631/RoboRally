@@ -2,6 +2,7 @@ package main;
 
 import board.Board;
 import board.BoardEntity;
+import exceptions.InvalidBoardException;
 import exceptions.NoMoreInstructionsException;
 
 import java.io.File;
@@ -21,7 +22,7 @@ public class Game {
 	private int indexOfCurrentPlayer = 0;
 	private int iterations = 0;
 
-	public Game(String brdPath, String prgPath) {
+	public Game(String brdPath, String prgPath) throws InvalidBoardException {
 		// load game from file
 		try {
 			this.board = new Board(new ArrayList<>(Files.readAllLines(new File(brdPath).toPath())));
@@ -44,7 +45,7 @@ public class Game {
 
 	}
 
-	public Game(HashMap<String, ArrayList<String>> playersHM, ArrayList<String> board) {
+	public Game(HashMap<String, ArrayList<String>> playersHM, ArrayList<String> board) throws InvalidBoardException {
 		// for GUI support
 		// HashMAP -> {"Alice": ("FLFWF","RFWFL")} # player stats
 		// ArrayList -> [...., ....., ....., .....] # board
