@@ -1,23 +1,60 @@
 package board;
 
 import exceptions.InvalidBoardException;
+import main.Game;
 import main.Player;
 
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 
+/**
+ * This class contains a representation of the board and functions to manipulate it
+ * <p><strong>
+ *     More information to come
+ * </strong></p>
+ *
+ * @author Asad Khan
+ */
 public class Board {
 
+	/**
+	 * Empty nested ArrayList of type BoardEntity, holds all entities on
+	 * the board
+	 */
 	private ArrayList<ArrayList<BoardEntity>> board = new ArrayList<>();
+
+	/**
+	 * Empty ArrayList of players found on board
+	 * <p>
+	 * Note: This is only used to a retrieve player positions from the board
+	 * actual players are stores in {@link Game}
+	 */
 	private ArrayList<Player> players = new ArrayList<>();
+
+	/**
+	 * ArrayList of Flags objects on the board
+	 */
 	private ArrayList<Flag> flags = new ArrayList<>(); // stores list of flags
+
+	/**
+	 * Length of board in x direction, technically max index (len - 1)
+	 */
 	private int xLen;
+
+	/**
+	 * Length of  board in Y direction, technically max index (len - 1)
+	 */
 	private int yLen;
 
+	/**
+	 * Constructs and initialises {@code board}, {@code flags} and {@code player} objects from lines
+	 *
+	 * @param lines A list of strings each on line of the board
+	 * @throws InvalidBoardException If board {@code lines} cannot be parsed correctly
+	 */
 	public Board(ArrayList<String> lines) throws InvalidBoardException {
 		// set up board
-
 		this.xLen = lines.get(1).replaceAll(" ", "").length();
 		this.yLen = lines.size() - 1;
 
@@ -148,6 +185,13 @@ public class Board {
 
 	}
 
+	/**
+	 * Validates the Board ensuring the board x lengths are consistent
+	 * ignores y length this will always be one value
+	 *
+	 * @param lines sets the size of the Board
+	 * @throws InvalidBoardException inconsistent x lengths for each line
+	 */
 	private void validateBoard(List<String> lines) throws InvalidBoardException {
 		for (String line : lines) {
 			// checks all x lengths are consistent
@@ -158,6 +202,24 @@ public class Board {
 
 	}
 
+	/**
+	 * Finds first player between {@link LaserMarker} objects both horizontal and vertical
+	 * and reduces health by one
+	 */
+	public void activateLasers() {
+		// fires laser in both horizontal and vertical
+		for (Player p : Arrays.asList(this.findPlayerInHorizontalLasers(), this.findPlayerInVerticalLasers())) {
+			if (p != null) {
+				p.decreaseHealth(1); // take one of health
+			}
+		}
+	}
+
+	/**
+	 * Attempts to find the first player in the vertical path between {@link LaserMarker}
+	 *
+	 * @return {@link Player} if player found else <code>null</code>
+	 */
 	private Player findPlayerInVerticalLasers() {
 		// ( -> ) finds first player in laser path and returns
 		// if non found returns null
@@ -186,8 +248,11 @@ public class Board {
 		return null; // no players in laser
 	}
 
-
-
+	/**
+	 * Attempts to find the first player in the Horizontal path between {@link LaserMarker}
+	 *
+	 * @return {@link Player} if player found else <code>null</code>
+	 */
 	private Player findPlayerInHorizontalLasers() {
 		// [ -> ] finds first player in laser path and returns
 		// if non found returns null
@@ -215,15 +280,35 @@ public class Board {
 		return null; // no players in laser
 	}
 
+	/**
+	 * Adds board entity to board, expects x and y of entity to be set
+	 * to location it will be placed
+	 *
+	 * @param bE {@link BoardEntity} to add
+	 */
 	private void addEntity(BoardEntity bE) {
 		this.board.get(bE.getY()).set(bE.getX(), bE);
 
 	}
 
+	/**
+	 * Gets {@code BoardEntity} at specific location
+	 *
+	 * @param x coordinate
+	 * @param y coordinate
+	 * @return {@code BoardEntity} found
+	 */
 	public BoardEntity getEntity(int x, int y) {
 		return this.board.get(y).get(x);
 	}
 
+	/**
+	 * Checks and gets player at specified x and y
+	 *
+	 * @param x coordinate
+	 * @param y coordinate
+	 * @return {@code Player} if found else {@code null}
+	 */
 	public Player checkPlayerAtLocation(int x, int y) {
 		// if player found at location, return player
 		// otherwise return null
@@ -235,6 +320,12 @@ public class Board {
 		return null;
 	}
 
+	/**
+	 * Pushes the player in specified direction
+	 *
+	 * @param player    to push
+	 * @param direction to be pushed in
+	 */
 	private void pushPlayer(Player player, String direction) {
 		String originalDirection = player.getDirection(); // resets direction
 		player.setDirection(direction);
@@ -242,6 +333,18 @@ public class Board {
 		player.setDirection(originalDirection); // resets direction
 	}
 
+	/**
+	 * Sets the players position on the Board
+	 *
+	 * <p><strong>
+	 * Note: Recursively pushes players in appropriate direction
+	 * </strong></p>
+	 *
+	 * @param x      x coordinate of target location
+	 * @param y      y coordinate of target location
+	 * @param player player to push
+	 * @return {@code BoardEntity} the player is now on top of
+	 */
 	public BoardEntity placePlayer(int x, int y, Player player) {
 		Player p = this.checkPlayerAtLocation(x, y);
 
@@ -265,37 +368,47 @@ public class Board {
 
 	}
 
+	/**
+	 * @return current {@code board}
+	 */
 	public ArrayList<ArrayList<BoardEntity>> getBoard() {
 		return this.board;
 
 	}
 
+	/**
+	 * @return {@code ArrayList} of {@code players}
+	 */
 	public ArrayList<Player> getPlayers() {
 		return this.players;
 
 	}
 
-	public void activateLasers() {
-		// fires laser in both horizontal and vertical
-		for (Player p : Arrays.asList(this.findPlayerInHorizontalLasers(), this.findPlayerInVerticalLasers())) {
-			if (p != null) {
-				p.decreaseHealth(1); // take one of health
-			}
-		}
-	}
-
+	/**
+	 * @return {@code int} max x index
+	 */
 	public int getXLen() {
 		return xLen;
 	}
 
+	/**
+	 * @return {@code int} max y index
+	 */
 	public int getYLen() {
 		return yLen;
 	}
+
+	/**
+	 * @return {@code ArrayList} of {@code Flag} objects on board
+	 */
 
 	public ArrayList<Flag> getFlags() {
 		return this.flags;
 	}
 
+	/**
+	 * {@inheritDoc}
+	 */
 	@Override
 	public String toString() {
 		StringBuilder sb = new StringBuilder();

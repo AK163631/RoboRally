@@ -2,6 +2,11 @@ package main;
 
 import exceptions.InvalidBoardException;
 
+/** 
+ * Class Main which starts the game
+ * @author Asad Khan
+ *
+ */
 public class Main {
 	// TODO tighten access modifiers - mostly done
 	// TODO leave function optimisation for other group members/ otherwise do my self
@@ -9,6 +14,7 @@ public class Main {
 	// TODO error handling for invalid brd or prg files - inProgress
 
 	// example usage of game class
+
 	public static void main(String[] args) {
 		Game g = null;
 		try {
