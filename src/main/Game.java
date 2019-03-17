@@ -12,6 +12,11 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 
+/**
+ * This class represents the game
+ *
+ * @author Asad Khan
+ */
 public class Game {
 
 	private Board board;
@@ -22,6 +27,14 @@ public class Game {
 	private int indexOfCurrentPlayer = 0;
 	private int iterations = 0;
 
+	/**
+	 * This Constructor attempts to load a Game from a file
+	 * this constructor is used for a TUI
+	 *
+	 * @param brdPath is a file that sets the representation of the board
+	 * @param prgPath is a file that holds the Player names and their moves
+	 * @throws InvalidBoardException in case of invalid values
+	 */
 	public Game(String brdPath, String prgPath) throws InvalidBoardException {
 		// load game from file
 		try {
@@ -45,6 +58,14 @@ public class Game {
 
 	}
 
+	/**
+	 * Allows for game to the constructed from a custom
+	 * user inputs through gui
+	 *
+	 * @param playersHM {"Alice": ("FLFWF","RFWFL")} player stats
+	 * @param board     [...., ....., ....., .....]
+	 * @throws InvalidBoardException board is miss aligned
+	 */
 	public Game(HashMap<String, ArrayList<String>> playersHM, ArrayList<String> board) throws InvalidBoardException {
 		// for GUI support
 		// HashMAP -> {"Alice": ("FLFWF","RFWFL")} # player stats
@@ -63,6 +84,12 @@ public class Game {
 
 	}
 
+	/**
+	 * Sets initial player representation from board adn names
+	 * and removes redundant/unused players
+	 *
+	 * @param names player names that need to be assigned
+	 */
 	private void setInitialPlayerNamesRepr(String[] names) {
 
 		// set initial player names and repr
@@ -78,16 +105,28 @@ public class Game {
 
 	}
 
+	/**
+	 * true = game still has steps remaining there is no winner yet or more instructions are available<br>
+	 * false = game has ended and there is a winner or there no more instructions therefore a draw
+	 *
+	 * @return {@code this.winner == null && !this.draw}
+	 */
 	public boolean hasNext() {
-		// true = game still has steps remaining there is no winner yet or no more
-		// instructions
-		// false = game has ended and there is a winner and there are still instructions
-		// to execute
-		return !this.draw;
-		// return this.winner == null | !this.draw;
+		//true = game still has steps remaining there is no winner yet or more instructions are available<br>
+		//false = game has ended and there is a winner or there no more instructions therefore a draw
+
+		return this.winner == null && !this.draw;
+		//return !this.draw;
 	}
 
-
+	/**
+	 * Runs game for one step<br>
+	 * Executes {@link Player#step()} for each player in correct order
+	 *
+	 * @see #activateAllActions()
+	 * @see #startIndex
+	 * @see #winner
+	 */
 	public void step() {
 
 		if (!this.hasNext()) {
@@ -129,6 +168,10 @@ public class Game {
 		this.iterations++;
 	}
 
+	/**
+	 * activates all players and the board entities under the player
+	 */
+
 	private void activateAllActions() {
 
 		// activates board entities under player
@@ -146,18 +189,32 @@ public class Game {
 		}
 	}
 
+	/**
+	 * {@code Player} if winner else {@code null}
+	 *
+	 * @return gets winner
+	 */
 	public Player getWinner() {
 		return this.winner;
 	}
 
+	/**
+	 * @return gets raw board
+	 */
 	public ArrayList<ArrayList<BoardEntity>> getBoard() {
 		return this.board.getBoard();
 	}
 
+	/**
+	 * @return gets players currently in game
+	 */
 	public ArrayList<Player> getPlayers() {
 		return this.players;
 	}
 
+	/**
+	 * {@inheritDoc}
+	 */
 	@Override
 	public String toString() {
 		// game state as string

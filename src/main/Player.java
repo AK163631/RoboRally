@@ -9,6 +9,11 @@ import exceptions.NoMoreInstructionsException;
 import java.util.ArrayList;
 import java.util.Arrays;
 
+/**
+ * Manages player state and associated player manipulation functions
+ *
+ * @author Asad Khan
+ */
 public class Player {
 
 	private ArrayList<ArrayList<String>> instructions = new ArrayList<>();
@@ -28,6 +33,14 @@ public class Player {
 	private String name;
 	private String repr;
 
+	/**
+	 * Constructs player object
+	 *
+	 * @param x     initial x coordinate
+	 * @param y     initial y coordinate
+	 * @param board reference to the main board
+	 * @param repr  player representation
+	 */
 	public Player(int x, int y, Board board, String repr) {
 		this.x = x;
 		this.y = y;
@@ -38,6 +51,12 @@ public class Player {
 		this.onTopOf = this.board.getEntity(x, y);
 	}
 
+	/**
+	 * Decreases player health by value specified
+	 * in factor
+	 *
+	 * @param factor factor to decrease health by
+	 */
 	public void decreaseHealth(int factor) {
 		this.health -= factor;
 
@@ -47,12 +66,22 @@ public class Player {
 		}
 	}
 
+	/**
+	 * Checks if the player has won
+	 *
+	 * @return a {@code Boolean} which specifies true if the player has won,
+	 * and false otherwise
+	 */
 	public boolean checkWin() {
-
 		// checks is play flag list is equal to list of all flags on the board
 		return this.flags.equals(this.board.getFlags());
 	}
 
+	/**
+	 * Adds flag to player. Checks if flag is in the right order before adding
+	 *
+	 * @param flag flag to be added
+	 */
 	public void addFlag(Flag flag) {
 		// adds flag to flags if in correct order
 		// otherwise ignores
@@ -66,9 +95,7 @@ public class Player {
 				// adds first flag
 				this.flags.add(flag);
 			}
-
 		}
-
 		// check is flag is one greater then the last flag added
 		else if (flag.getValue() == this.flags.get(this.flags.size() - 1).getValue() + 1) {
 			this.flags.add(flag);
@@ -76,8 +103,12 @@ public class Player {
 
 	}
 
+	/**
+	 * Decreases health of first player found directly
+	 * in front of player
+	 */
 	public void fireLaser() {
-		// function needs optimisation
+		// function may need optimisation
 
 		// resolves first player in front of player
 		// decreases its health by one
@@ -119,17 +150,25 @@ public class Player {
 					}
 				}
 				break;
-
-
 		}
 
 	}
 
+	/**
+	 * calls {@link board.BoardEntity#act(Player, BoardEntity)} of {@code BoardEntity} player
+	 * is on top of
+	 */
 	public void activateEntity() {
 		this.onTopOf.act(this, this.prevEntity);
 		// activates board entity it is on-top of
 	}
 
+	/**
+	 * Loops though initial position(ip), North of ip, East of ip, South of ip and West of ip
+	 * in order looks for first available location and places player at that location
+	 * Sets {@code direction} to North
+	 * Sets {@code health} to 5
+	 */
 	public void restPlayer() {
 		// if initial location occupied will check N,E,S,W in order, for available space
 		this.health = 5;
@@ -166,14 +205,30 @@ public class Player {
 		}
 	}
 
+	/**
+	 * Turns the player anti clockwise by 90 degrees
+	 *
+	 * @param multiplier how many times the player will turn
+	 */
 	public void turnACW90(int multiplier) {
 		this.directionIndex -= multiplier;
 	}
 
+	/**
+	 * Turns the player clockwise by 90 degrees
+	 *
+	 * @param multiplier how many times the player will turn
+	 */
 	public void turnCW90(int multiplier) {
 		this.directionIndex += multiplier;
 	}
 
+	/**
+	 * Executes next instruction from instruction list
+	 *
+	 * @throws NoMoreInstructionsException when no more instructions found
+	 * @see #executeInstruction(String)
+	 */
 	public void step() throws NoMoreInstructionsException {
 
 		// executes current instruction
@@ -196,6 +251,11 @@ public class Player {
 		}
 	}
 
+	/**
+	 * Executes the instruction specified
+	 *
+	 * @param instruction instruction character to execute
+	 */
 	private void executeInstruction(String instruction) {
 		switch (instruction) {
 			case "F":
@@ -216,6 +276,12 @@ public class Player {
 		}
 	}
 
+	/**
+	 * Moves the Player forward in current direction by one place
+	 * Rests player if fallen of board
+	 *
+	 * @see Player#restPlayer()
+	 */
 	public void moveForward() {
 		try {
 			switch (this.getDirection()) {
@@ -239,49 +305,99 @@ public class Player {
 		}
 	}
 
+	/**
+	 * Moves the Player backwards by inverting the direction by 180 degrees
+	 * then moving it forward then inverting its direction again by 180 degrees
+	 *
+	 * @see Player#turnCW90(int)
+	 * @see Player#moveForward()
+	 */
 	private void moveBackward() {
 		this.turnCW90(2); // flip
 		this.moveForward();
 		this.turnCW90(2); // return to original direction
 	}
 
+	/**
+	 * Add an instruction to the instruction block
+	 *
+	 * @param instruction block of instructions to add
+	 */
 	public void addInstruction(String instruction) {
 		// add instruction block to instructions
 		this.instructions.add(new ArrayList<>(Arrays.asList(instruction.split(""))));
 	}
 
-
+	/**
+	 * Sets the location of the Player
+	 *
+	 * @param x x coordinate
+	 * @param y y coordinate
+	 */
 	public void setLocation(int x, int y) {
 		this.x = x;
 		this.y = y;
 	}
 
+	/**
+	 * @return x coordinate of current player location
+	 */
 	public int getX() {
 		return this.x;
 	}
 
+	/**
+	 * @return y coordinate of current player location
+	 */
 	public int getY() {
 		return this.y;
 	}
 
-	public void setName(String name) { this.name = name; }
+	/**
+	 * Sets the player name
+	 *
+	 * @param name player name
+	 */
+	public void setName(String name) {
 
+		this.name = name;
+	}
+
+	/**
+	 * @return  gets player Name
+	 */
 	public String getName() {
 		return this.name;
 	}
 
+	/**
+	 * Sets the previous boardEntity
+	 *
+	 * @param bE previous board entity player was on top of {@link BoardEntity}
+	 */
 	public void setPrevEntity(BoardEntity bE) {
 		this.prevEntity = bE;
 	}
 
-
+	/**
+	 * @return gets player representation
+	 */
 	public String getRepr() {
 		return this.repr;
 	}
 
+	/**
+	 * Sets the direction of the Player
+	 *
+	 * @param direction direction
+	 */
 	public void setDirection(String direction) {
 		this.directionIndex = this.directions.indexOf(direction);
 	}
+
+	/**
+	 * @return gets current direction of player
+	 */
 
 	public String getDirection() {
 		// behaves cyclically
@@ -292,10 +408,16 @@ public class Player {
 		}
 	}
 
+	/**
+	 * @return {@code BoardEntity} player is on top of
+	 */
 	public BoardEntity getOnTopOf() {
 		return onTopOf;
 	}
 
+	/**
+	 * {@inheritDoc}
+	 */
 	@Override
 	public String toString() {
 		return this.getName() + " " + this.getRepr() + " " + this.getDirection() + " "
