@@ -25,7 +25,6 @@ public abstract class BoardEntity {
 	 * @see #setRepr(String)
 	 * @see #getX()
 	 */
-
 	public BoardEntity(int x, int y, String repr) {
 		this.x = x;
 		this.y = y;
