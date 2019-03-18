@@ -105,16 +105,16 @@ public class Board {
 						bE = new Gears(x, y - 1, "-");
 						break;
 					case "v":
-						bE = new Conveyor(x, y - 1, "S", "v", this);
+						bE = new Conveyor(x, y - 1, "v", "S", this);
 						break;
 					case "<":
-						bE = new Conveyor(x, y - 1, "W", "<", this);
+						bE = new Conveyor(x, y - 1, "<", "W", this);
 						break;
 					case ">":
-						bE = new Conveyor(x, y - 1, "E", ">", this);
+						bE = new Conveyor(x, y - 1, ">", "E", this);
 						break;
 					case "^":
-						bE = new Conveyor(x, y - 1, "N", "^", this);
+						bE = new Conveyor(x, y - 1, "^", "N", this);
 						break;
 					case "N":
 						bE = new CornerConveyor(x, y - 1, "N");
@@ -218,7 +218,7 @@ public class Board {
 	/**
 	 * Attempts to find the first player in the vertical path between {@link LaserMarker}
 	 *
-	 * @return {@link Player} if player found else <code>null</code>
+	 * @return {@link Player} if player found else {@code null}
 	 */
 	private Player findPlayerInVerticalLasers() {
 		// ( -> ) finds first player in laser path and returns
