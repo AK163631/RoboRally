@@ -196,7 +196,7 @@ public class Board {
 		for (String line : lines) {
 			// checks all x lengths are consistent
 			if (line.replaceAll(" ", "").length() != this.getXLen()) {
-				throw new InvalidBoardException();
+				throw new InvalidBoardException("Board length inconsistent unable to parse");
 			}
 		}
 
@@ -354,7 +354,7 @@ public class Board {
 		}
 
 		BoardEntity prevBe = this.getEntity(player.getX(), player.getY());
-		prevBe.RestorRepr(); // Restores original representation of previous location
+		prevBe.restoreRepr(); // Restores original representation of previous location
 
 		BoardEntity bE = this.getEntity(x, y);
 		bE.setRepr(player.getRepr()); // set new representation

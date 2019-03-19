@@ -3,6 +3,7 @@ package main;
 import board.Board;
 import board.BoardEntity;
 import exceptions.InvalidBoardException;
+import exceptions.InvalidPlayerConfigurationException;
 import exceptions.NoMoreInstructionsException;
 
 import java.io.File;
@@ -33,9 +34,10 @@ public class Game {
 	 *
 	 * @param brdPath is a file that sets the representation of the board
 	 * @param prgPath is a file that holds the Player names and their moves
-	 * @throws InvalidBoardException in case of invalid values
+	 * @throws InvalidBoardException               in case of invalid values
+	 * @throws InvalidPlayerConfigurationException player config incorrect
 	 */
-	public Game(String brdPath, String prgPath) throws InvalidBoardException {
+	public Game(String brdPath, String prgPath) throws InvalidBoardException, InvalidPlayerConfigurationException {
 		// load game from file
 		try {
 			this.board = new Board(new ArrayList<>(Files.readAllLines(new File(brdPath).toPath())));
@@ -51,9 +53,15 @@ public class Game {
 				}
 			}
 
+			this.validatePlayers();
+
 		} catch (IOException e) {
 			System.err.println(e.toString());
 			System.exit(-1); // quits game
+
+		} catch (IndexOutOfBoundsException e) {
+			// alignment inconsistent
+			throw new InvalidPlayerConfigurationException("Name and Instruction alignment inconsistent unable to parse");
 		}
 
 	}
@@ -64,9 +72,11 @@ public class Game {
 	 *
 	 * @param playersHM {"Alice": ("FLFWF","RFWFL")} player stats
 	 * @param board     [...., ....., ....., .....]
-	 * @throws InvalidBoardException board is miss aligned
+	 * @throws InvalidBoardException               board is miss aligned
+	 * @throws InvalidPlayerConfigurationException player config incorrect
 	 */
-	public Game(HashMap<String, ArrayList<String>> playersHM, ArrayList<String> board) throws InvalidBoardException {
+	public Game(HashMap<String, ArrayList<String>> playersHM, ArrayList<String> board) throws InvalidBoardException,
+			InvalidPlayerConfigurationException {
 		// for GUI support
 		// HashMAP -> {"Alice": ("FLFWF","RFWFL")} # player stats
 		// ArrayList -> [...., ....., ....., .....] # board
@@ -74,14 +84,32 @@ public class Game {
 		this.players = this.board.getPlayers();
 		this.setInitialPlayerNamesRepr((String[]) playersHM.keySet().toArray());
 
-		int count = 0;
-		for (String key : playersHM.keySet()) {
-			for (String block : playersHM.get(key)) {
-				this.players.get(count).addInstruction(block);
+		// initialize player instructions
+		try {
+			int count = 0;
+			for (String key : playersHM.keySet()) {
+				for (String block : playersHM.get(key)) {
+					this.players.get(count).addInstruction(block);
+				}
+				count++;
 			}
-			count++;
+
+			this.validatePlayers();
+
+		} catch (IndexOutOfBoundsException e) {
+			// alignment inconsistent
+			throw new InvalidPlayerConfigurationException("Name and Instruction alignment inconsistent unable to parse");
 		}
 
+	}
+
+	private void validatePlayers() throws InvalidPlayerConfigurationException {
+
+		for (Player p : this.players) {
+
+			p.validatePlayer();
+
+		}
 	}
 
 	/**
@@ -176,8 +204,8 @@ public class Game {
 
 		// activates board entities under player
 		for (Player p : this.players) {
-			p.activateEntity();
 
+			p.activateEntity();
 		}
 
 		this.board.activateLasers(); // board activates laser

@@ -57,7 +57,7 @@ public abstract class BoardEntity {
 	 * restores the original representation
 	 */
 
-	public void RestorRepr() {
+	public void restoreRepr() {
 		// Restores original representation
 		this.repr = this.getFinalRepr();
 	}
