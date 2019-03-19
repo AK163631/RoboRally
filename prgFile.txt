@@ -1,4 +1,4 @@
 format 1
-Alice Bobby 
-FLFWF WFWFL
-RFWFL FRWRF
+Alice Bob
+FWFLF FWFLB
+FWLRL FLFLF

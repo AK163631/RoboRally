@@ -1,6 +1,7 @@
 package main;
 
 import exceptions.InvalidBoardException;
+import exceptions.InvalidPlayerConfigurationException;
 
 /** 
  * Class Main which starts the game
@@ -9,9 +10,8 @@ import exceptions.InvalidBoardException;
  */
 public class Main {
 	// TODO tighten access modifiers - mostly done
-	// TODO leave function optimisation for other group members/ otherwise do my self
-	// TODO get team members to complete javadoc using in-line comments as a guide for how functions work
-	// TODO error handling for invalid brd or prg files - inProgress
+	// TODO error handling for invalid prg - mostly done
+	// TODO figure out why test files are not acting as expected
 
 	// example usage of game class
 
@@ -21,7 +21,7 @@ public class Main {
 
 			g = new Game("brdFile.txt", "prgFile.txt");
 
-		} catch (InvalidBoardException e) {
+		} catch (InvalidBoardException | InvalidPlayerConfigurationException e) {
 
 			System.out.println(e.toString());
 			System.exit(-1);
@@ -34,6 +34,12 @@ public class Main {
 			System.out.println(g);
 		}
 		System.out.println(g); //  after shot
+
+		if (g.getWinner() != null) {
+			System.out.println("Winner: " + g.getWinner().getName());
+		} else {
+			System.out.println("Draw");
+		}
 
 	}
 

@@ -4,10 +4,12 @@ import board.Board;
 import board.BoardEntity;
 import board.Flag;
 import board.NoLocation;
+import exceptions.InvalidPlayerConfigurationException;
 import exceptions.NoMoreInstructionsException;
 
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.Set;
 
 /**
  * Manages player state and associated player manipulation functions
@@ -51,6 +53,42 @@ public class Player {
 		this.onTopOf = this.board.getEntity(x, y);
 	}
 
+
+	public void validatePlayer() throws InvalidPlayerConfigurationException {
+		int initialBlockSize = this.instructions.get(0).size();
+		for (ArrayList<String> block : this.instructions) {
+
+			// checks if block sizes are inconsistent
+			if (block.size() != initialBlockSize) {
+				throw new InvalidPlayerConfigurationException("Instruction blocks inconsistent expected size of "
+						+ initialBlockSize + " got " + block.size() + " for player " + this.name);
+			}
+
+			// checks if instructions are all the same
+			// loops through in block in sets of 2
+			for (int start = 0, end = 2; end <= block.size(); start++, end++) {
+
+				if (Set.copyOf(block.subList(start, end)).size() == 1) {
+					// sets can only have one of each item
+					// size == 1 if all items in a list are duplicate
+					throw new InvalidPlayerConfigurationException("Repetition of " + block.get(start) + " in block "
+							+ String.join("", block) + " for player " + this.name);
+				}
+
+			}
+
+
+			ArrayList<String> al = new ArrayList<>(Arrays.asList("L", "R", "U", "F", "B", "W"));
+			for (String i : block) {
+				// check if instruction in not in accepted instructions
+				if (!al.contains(i)) {
+					throw new InvalidPlayerConfigurationException("Invalid instruction " + i + " for player " + this.name);
+				}
+			}
+		}
+
+	}
+
 	/**
 	 * Decreases player health by value specified
 	 * in factor
@@ -74,7 +112,7 @@ public class Player {
 	 */
 	public boolean checkWin() {
 		// checks is play flag list is equal to list of all flags on the board
-		return this.flags.equals(this.board.getFlags());
+		return this.flags.size() == this.board.getFlags().size();
 	}
 
 	/**
@@ -113,10 +151,12 @@ public class Player {
 		// resolves first player in front of player
 		// decreases its health by one
 
+
 		switch (this.getDirection()) {
+			// fix this
 			case "N":
-				for (int i = 1; i >= this.y - i; i++) {
-					Player p = this.board.checkPlayerAtLocation(this.x, this.y - i);
+				for (int y = this.y - 1; y >= 0; y--) {
+					Player p = this.board.checkPlayerAtLocation(this.x, y);
 					if (p != null) {
 						p.decreaseHealth(1);
 						break;
@@ -124,8 +164,8 @@ public class Player {
 				}
 				break;
 			case "E":
-				for (int i = 1; i + this.x < this.board.getXLen(); i++) {
-					Player p = this.board.checkPlayerAtLocation(this.x + i, this.y);
+				for (int x = this.x + 1; x < this.board.getXLen(); x++) {
+					Player p = this.board.checkPlayerAtLocation(x, this.y);
 					if (p != null) {
 						p.decreaseHealth(1);
 						break;
@@ -133,8 +173,8 @@ public class Player {
 				}
 				break;
 			case "S":
-				for (int i = 1; this.y + i < this.board.getYLen(); i++) {
-					Player p = this.board.checkPlayerAtLocation(this.x, this.y + i);
+				for (int y = this.y + 1; y < this.board.getYLen(); y++) {
+					Player p = this.board.checkPlayerAtLocation(this.x, y);
 					if (p != null) {
 						p.decreaseHealth(1);
 						break;
@@ -142,8 +182,8 @@ public class Player {
 				}
 				break;
 			case "W":
-				for (int i = 1; this.x - i >= 0; i++) {
-					Player p = this.board.checkPlayerAtLocation(this.x - i, this.y);
+				for (int x = this.x - 1; x >= 0; x--) {
+					Player p = this.board.checkPlayerAtLocation(x, this.y);
 					if (p != null) {
 						p.decreaseHealth(1);
 						break;
@@ -364,7 +404,7 @@ public class Player {
 	}
 
 	/**
-	 * @return  gets player Name
+	 * @return gets player Name
 	 */
 	public String getName() {
 		return this.name;
@@ -407,6 +447,7 @@ public class Player {
 			return this.directions.get(this.directionIndex % this.directions.size());
 		}
 	}
+
 
 	/**
 	 * @return {@code BoardEntity} player is on top of

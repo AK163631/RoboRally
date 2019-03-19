@@ -3,7 +3,8 @@ package exceptions;
 public class InvalidBoardException extends Exception {
 
 	// thrown is board file is in an invalid format or erroneous
-	public InvalidBoardException() {
-		super();
+	public InvalidBoardException(String errMsg) {
+		super(errMsg);
+
 	}
 }
