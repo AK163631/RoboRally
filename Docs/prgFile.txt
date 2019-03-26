@@ -1,4 +1,0 @@
-format 1
-Alice Bob
-FWFLF FWFLB
-FWLRL FLFLF
