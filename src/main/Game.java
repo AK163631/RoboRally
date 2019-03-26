@@ -14,30 +14,68 @@ import java.util.HashMap;
 import java.util.List;
 
 /**
- * This class represents the game
+ * This class represents the whole game. It was specifically designed to abstract away all logic
+ * related to the management of the game state and processes related to execution of player instructions.
+ * The class also provides intimate access to its state to allow for the GUI or TUI to update as necessary
+ * either gracefully or all at once (at UI developers digression).
+ * <p>
+ * The only way to influence the game state is by calling the step function which will run the game.
+ * hasNext will tell the user weather the game still has steps remaining.
+ * The associated getters provide an insight into the game.
  *
  * @author Asad Khan
  */
 public class Game {
 
+	/**
+	 * Holds game board
+	 */
 	private Board board;
+
+	/**
+	 * List of players that are currently active in game
+	 */
 	private ArrayList<Player> players;
+
+	/**
+	 * Winning player null if no player has one yet
+	 */
 	private Player winner;
+
+	/**
+	 * {@code false} = No draw there is a winner<br>
+	 * {@code true} = All instructions complete and there is no winner
+	 */
 	private boolean draw = false;
+
+	/**
+	 * Index of the first player
+	 */
 	private int startIndex = 0;
+
+	/**
+	 * Index of current player to step
+	 */
 	private int indexOfCurrentPlayer = 0;
+
+	/**
+	 * number of players that have been executed on each text
+	 * rests after all players have been stepped
+	 */
 	private int iterations = 0;
 
 	/**
-	 * This Constructor attempts to load a Game from a file
-	 * this constructor is used for a TUI
+	 * Creates an instance from program file path and board file path.
+	 * If either file is not found an {@link java.io.IOException} is raised otherwise
+	 * the files are parsed and the appropriate board and player objects are created.
 	 *
-	 * @param brdPath is a file that sets the representation of the board
-	 * @param prgPath is a file that holds the Player names and their moves
-	 * @throws InvalidBoardException               in case of invalid values
-	 * @throws InvalidPlayerConfigurationException player config incorrect
+	 * @param brdPath is a file that contains the representation of the board
+	 * @param prgPath is a file that contains the players names and their instructions
+	 * @throws InvalidBoardException               In case the board file could not be parsed or parsed incorrectly
+	 * @throws InvalidPlayerConfigurationException In case the player file could not be parsed or parsed incorrectly
+	 * @throws IOException                         Exception reading game files i.e. no found, unable to read, etc
 	 */
-	public Game(String brdPath, String prgPath) throws InvalidBoardException, InvalidPlayerConfigurationException {
+	public Game(String brdPath, String prgPath) throws InvalidBoardException, InvalidPlayerConfigurationException, IOException {
 		// load game from file
 		try {
 			this.board = new Board(new ArrayList<>(Files.readAllLines(new File(brdPath).toPath())));
@@ -55,10 +93,6 @@ public class Game {
 
 			this.validatePlayers();
 
-		} catch (IOException e) {
-			System.err.println(e.toString());
-			System.exit(-1); // quits game
-
 		} catch (IndexOutOfBoundsException e) {
 			// alignment inconsistent
 			throw new InvalidPlayerConfigurationException("Name and Instruction alignment inconsistent unable to parse");
@@ -67,13 +101,16 @@ public class Game {
 	}
 
 	/**
-	 * Allows for game to the constructed from a custom
-	 * user inputs through gui
+	 * Creates instance from {@link java.util.HashMap} (player data) and {@link java.util.ArrayList} (board data)
+	 * objects main purpose is to allow for custom game construction from the UI.
+	 * <p>
+	 * {@code HashMap} structure = {PlayerName: [InstructionBlock1, InstructionBlock2, InstructionBlock3, …]}<br>
+	 * {@code ArrayList} structure = [BoardLine0, BoardLine1, BoardLine2, …]
 	 *
-	 * @param playersHM {"Alice": ("FLFWF","RFWFL")} player stats
-	 * @param board     [...., ....., ....., .....]
-	 * @throws InvalidBoardException               board is miss aligned
-	 * @throws InvalidPlayerConfigurationException player config incorrect
+	 * @param playersHM Data structure contains player data
+	 * @param board     Data structure contains board data
+	 * @throws InvalidBoardException               In case the board file could not be parsed or parsed incorrectly
+	 * @throws InvalidPlayerConfigurationException In case the player file could not be parsed or parsed incorrectly
 	 */
 	public Game(HashMap<String, ArrayList<String>> playersHM, ArrayList<String> board) throws InvalidBoardException,
 			InvalidPlayerConfigurationException {
@@ -103,23 +140,34 @@ public class Game {
 
 	}
 
+	/**
+	 * Validates all players.
+	 * Calls validation function for each player.
+	 *
+	 * @throws InvalidPlayerConfigurationException In case the player file could not be parsed or parsed incorrectly
+	 * @see Player#validatePlayer()
+	 */
 	private void validatePlayers() throws InvalidPlayerConfigurationException {
-
 		for (Player p : this.players) {
-
 			p.validatePlayer();
-
 		}
+
 	}
 
 	/**
-	 * Sets initial player representation from board adn names
-	 * and removes redundant/unused players
+	 * Reads through unallocated player names and assigns names to players found on the board.
+	 * Initial player representation (its letter). All unallocated players are removed from game and board
+	 * <p><strong>
+	 * Note: first letter of the player name may not necessarily be the same as the players representation.
+	 * Assignments are done in order indiscriminate of name or representation
+	 * </strong></p>
 	 *
 	 * @param names player names that need to be assigned
+	 * @see Player#setName(String)
+	 * @see Player#getName()
+	 * @see Player#getRepr()
 	 */
 	private void setInitialPlayerNamesRepr(String[] names) {
-
 		// set initial player names and repr
 		for (int i = 0; i < names.length; i++) {
 			Player p = this.players.get(i);
@@ -127,15 +175,16 @@ public class Game {
 			BoardEntity bE = this.board.getEntity(p.getX(), p.getY());
 			bE.setRepr(p.getRepr()); // sets initial repr
 		}
-
 		// removes unused players
 		this.players.removeIf(p -> p.getName() == null);
 
 	}
 
 	/**
-	 * true = game still has steps remaining there is no winner yet or more instructions are available<br>
-	 * false = game has ended and there is a winner or there no more instructions therefore a draw
+	 * Method indicates weather game still has steps left to execute.
+	 * <p>
+	 * {@code true} = Game still has steps remaining there is no winner yet or more instructions are available<br>
+	 * {@code false} = Game has ended and there is a winner or there are no more instructions to execute therefore a draw
 	 *
 	 * @return {@code this.winner == null && !this.draw}
 	 */
@@ -174,14 +223,9 @@ public class Game {
 				}
 			}
 
-			// rest iterations
-			this.iterations = 0;
-
-			// add 1 to start index
-			this.startIndex++;
-
-			// set current index to start point 
-			this.indexOfCurrentPlayer = this.startIndex;
+			this.iterations = 0; // rest iterations
+			this.startIndex++; // add 1 to start index
+			this.indexOfCurrentPlayer = this.startIndex; // set current index to start point
 		}
 
 		Player p = this.players.get(this.indexOfCurrentPlayer % this.players.size());
@@ -199,7 +243,6 @@ public class Game {
 	/**
 	 * activates all players and the board entities under the player
 	 */
-
 	private void activateAllActions() {
 
 		// activates board entities under player
@@ -220,21 +263,21 @@ public class Game {
 	/**
 	 * {@code Player} if winner else {@code null}
 	 *
-	 * @return gets winner
+	 * @return Gets winner
 	 */
 	public Player getWinner() {
 		return this.winner;
 	}
 
 	/**
-	 * @return gets raw board
+	 * @return Gets internal board
 	 */
-	public ArrayList<ArrayList<BoardEntity>> getBoard() {
-		return this.board.getBoard();
+	public Board getBoard() {
+		return this.board;
 	}
 
 	/**
-	 * @return gets players currently in game
+	 * @return Gets internal player list
 	 */
 	public ArrayList<Player> getPlayers() {
 		return this.players;

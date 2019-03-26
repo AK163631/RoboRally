@@ -438,14 +438,18 @@ public class Player {
 	/**
 	 * @return gets current direction of player
 	 */
-
 	public String getDirection() {
 		// behaves cyclically
-		if (this.directionIndex < 0)
-			return this.directions.get(this.directionIndex + this.directions.size());
-		else {
-			return this.directions.get(this.directionIndex % this.directions.size());
+		if (this.directions.isEmpty()) {
+			throw new IllegalStateException("this.directions is empty, may cause infinite loop");
 		}
+
+		while (directionIndex < 0) { // might loop for a while if number very large
+			// will never exit if list is empty
+			this.directionIndex = this.directions.size() + directionIndex;
+		}
+
+		return this.directions.get(this.directionIndex % this.directions.size());
 	}
 
 

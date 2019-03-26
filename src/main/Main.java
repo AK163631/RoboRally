@@ -3,25 +3,26 @@ package main;
 import exceptions.InvalidBoardException;
 import exceptions.InvalidPlayerConfigurationException;
 
-/** 
+import java.io.IOException;
+
+/**
  * Class Main which starts the game
- * @author Asad Khan
  *
+ * @author Asad Khan
  */
 public class Main {
-	// TODO tighten access modifiers - mostly done
-	// TODO error handling for invalid prg - mostly done
+	// TODO JavaDocs
 	// TODO figure out why test files are not acting as expected
 
-	// example usage of game class
 
+	// example usage of game class
 	public static void main(String[] args) {
 		Game g = null;
 		try {
 
 			g = new Game("brdFile.txt", "prgFile.txt");
 
-		} catch (InvalidBoardException | InvalidPlayerConfigurationException e) {
+		} catch (InvalidBoardException | InvalidPlayerConfigurationException | IOException e) {
 
 			System.out.println(e.toString());
 			System.exit(-1);
@@ -42,5 +43,6 @@ public class Main {
 		}
 
 	}
+
 
 }

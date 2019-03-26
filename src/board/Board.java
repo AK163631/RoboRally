@@ -401,7 +401,6 @@ public class Board {
 	/**
 	 * @return {@code ArrayList} of {@code Flag} objects on board
 	 */
-
 	public ArrayList<Flag> getFlags() {
 		return this.flags;
 	}
