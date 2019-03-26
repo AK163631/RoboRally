@@ -20,7 +20,7 @@ public class Main {
 		Game g = null;
 		try {
 
-			g = new Game("brdFile.txt", "prgFile.txt");
+			g = new Game("Docs\\brdFile.txt", "Docs\\prgFile.txt");
 
 		} catch (InvalidBoardException | InvalidPlayerConfigurationException | IOException e) {
 
