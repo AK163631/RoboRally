@@ -14,12 +14,12 @@ import java.util.List;
 /**
  * This class represents the whole game. It was specifically designed to abstract away all logic
  * related to the management of the game state and processes related to execution of player instructions.
- * The class also provides intimate access to its state to allow for the GUI or TUI to update as necessary
- * either gracefully or all at once (at UI developers digression).
+ * The class provides intimate access to its state to allow for the GUI or TUI to update as necessary
+ * either gracefully or all at once.
  * <p>
- * The only way to influence the game state is by calling the step function which will run the game.
- * hasNext will tell the user weather the game still has steps remaining.
- * The associated getters provide an insight into the game.
+ * Influencing the game state is done via {@link Game#step()} which will run the game.<br>
+ * {@link Game#hasNext()} will indicate weather the game still has steps remaining.<br>
+ * The associated getters provide an insight into the game state.
  *
  * @author Asad Khan
  */

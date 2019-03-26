@@ -32,6 +32,8 @@ public class CornerConveyor extends BoardEntity {
 	 */
 	@Override
 	public void act(Player player, BoardEntity prevEntity) {
+		// TODO un-sure if this also moves a player forward
+
 		if (!Arrays.asList("^", "v", ">", "<").contains(prevEntity.getFinalRepr())) {
 			return;
 		}
