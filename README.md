@@ -5,15 +5,14 @@ RoboRally Source
  - Start on the design
  - Javadoc - partially complete
 ### Code
- - Tighten access modifiers - mostly done  
- - Error handling for invalid brd or prg files - half done 
+ - Figure out why test files are not acting as expected
  
  ## TODOS's For Rob
- - The God Damn GUI that seems to be taking forever for him to start on. Wonder why?
-
+ - The GUI
+ 
 ## TODO's For The Rest Of Team
  - Complete unit tests using junit jupiter - Ayub 
- - Make a UML diagram from the code - Jimmy
+ - Noun Verb Analysis - Jimmy
 
 ## Usage 
 This is a basic idea of how the ```Game``` class should be used in the GUI.
