@@ -1,8 +1,7 @@
 package board;
 
-import exceptions.InvalidBoardException;
-import main.Game;
-import main.Player;
+import game.Game;
+import game.Player;
 
 import java.util.ArrayList;
 import java.util.Arrays;

@@ -1,6 +1,6 @@
 package board;
 
-import main.Player;
+import game.Player;
 
 /**
  * This class initialises the gear objects on the Board

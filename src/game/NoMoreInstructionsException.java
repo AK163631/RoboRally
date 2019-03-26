@@ -1,4 +1,4 @@
-package exceptions;
+package game;
 
 public class NoMoreInstructionsException extends Exception {
 

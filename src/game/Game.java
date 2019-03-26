@@ -1,10 +1,8 @@
-package main;
+package game;
 
 import board.Board;
 import board.BoardEntity;
-import exceptions.InvalidBoardException;
-import exceptions.InvalidPlayerConfigurationException;
-import exceptions.NoMoreInstructionsException;
+import board.InvalidBoardException;
 
 import java.io.File;
 import java.io.IOException;
@@ -102,7 +100,7 @@ public class Game {
 
 	/**
 	 * Creates instance from {@link java.util.HashMap} (player data) and {@link java.util.ArrayList} (board data)
-	 * objects main purpose is to allow for custom game construction from the UI.
+	 * objects game purpose is to allow for custom game construction from the UI.
 	 * <p>
 	 * {@code HashMap} structure = {PlayerName: [InstructionBlock1, InstructionBlock2, InstructionBlock3, …]}<br>
 	 * {@code ArrayList} structure = [BoardLine0, BoardLine1, BoardLine2, …]

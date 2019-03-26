@@ -1,7 +1,6 @@
-package main;
+package game;
 
-import exceptions.InvalidBoardException;
-import exceptions.InvalidPlayerConfigurationException;
+import board.InvalidBoardException;
 
 import java.io.IOException;
 

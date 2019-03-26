@@ -1,4 +1,4 @@
-package exceptions;
+package board;
 
 public class InvalidBoardException extends Exception {
 

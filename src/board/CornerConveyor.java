@@ -1,6 +1,6 @@
 package board;
 
-import main.Player;
+import game.Player;
 
 import java.util.Arrays;
 

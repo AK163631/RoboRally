@@ -1,6 +1,6 @@
 package board;
 
-import main.Player;
+import game.Player;
 
 /**
  * Will move player one step in the direction of the conveyor

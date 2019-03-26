@@ -30,8 +30,7 @@ display board in gui
 display players and stats in gui
 */
 
-// main game loop
-while (g.hasNext()) { // while game has further steps
+gamgameile (g.hasNext()) { // while game has further steps
     
     g.step(); // step the game once
     

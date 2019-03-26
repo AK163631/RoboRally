@@ -1,6 +1,6 @@
 package board;
 
-import main.Player;
+import game.Player;
 
 /**
  * this class is used to create flag objects on the board

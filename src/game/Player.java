@@ -1,11 +1,9 @@
-package main;
+package game;
 
 import board.Board;
 import board.BoardEntity;
 import board.Flag;
 import board.NoLocation;
-import exceptions.InvalidPlayerConfigurationException;
-import exceptions.NoMoreInstructionsException;
 
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -40,7 +38,7 @@ public class Player {
 	 *
 	 * @param x     initial x coordinate
 	 * @param y     initial y coordinate
-	 * @param board reference to the main board
+	 * @param board reference to the game board
 	 * @param repr  player representation
 	 */
 	public Player(int x, int y, Board board, String repr) {

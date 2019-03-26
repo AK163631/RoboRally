@@ -1,6 +1,6 @@
 package board;
 
-import main.Player;
+import game.Player;
 
 /**
  * This class is Place Holder class for a Pit

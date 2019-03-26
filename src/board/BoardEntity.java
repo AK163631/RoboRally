@@ -1,6 +1,6 @@
 package board;
 
-import main.Player;
+import game.Player;
 
 /**
  * this is an abstract class to create a BoardEntity
