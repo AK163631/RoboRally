@@ -9,32 +9,106 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Set;
 
+
 /**
- * Manages player state and associated player manipulation functions
+ * An abstract representation of the {@code Player}.<br>
+ * {@code Player} is not treated as a {@code BoardEntity} rather a separate entity that encapsulates the
+ * {@code BoardEntity} it’s on top of.
+ * This design choice allows for the board entities the effect the player (by location, direction, etc) without the
+ * ability to affect other board objects or its self.<br>
+ * The Players are instantiated and initialised with its representation and location within the Board class then
+ * further initialised in Game.<br>
+ *
+ * All player manipulations are done thought {@link Player#step()}.
+ *
+ * Each instruction is executed sequentially and processed appropriately.
+ * {@link NoMoreInstructionsException} is thrown if step has exhausted all instructions.
  *
  * @author Asad Khan
  */
 public class Player {
 
+	/**
+	 * List of instructions to be executed
+	 */
 	private ArrayList<ArrayList<String>> instructions = new ArrayList<>();
+
+	/**
+	 * Constant list of directions available to the player clock wise order
+	 */
 	private final ArrayList<String> directions = new ArrayList<>(Arrays.asList("N", "E", "S", "W"));
+
+	/**
+	 * List of flags player has collected
+	 */
 	private ArrayList<Flag> flags = new ArrayList<>();
+
+	/**
+	 * {@link BoardEntity} player was previously on of
+	 */
 	private BoardEntity prevEntity;
+
+	/**
+	 * {@link BoardEntity} player is currently on top of
+	 */
 	private BoardEntity onTopOf;
+
+	/**
+	 * Index of the current instruction being executed
+	 */
 	private int instructionIndex = 0;
+
+	/**
+	 * Index of the current instruction block being executed
+	 */
 	private int instructionBlockIndex = 0;
+
+	/**
+	 * Index of the current direction in the directions list
+	 */
 	private int directionIndex = 0;
+	/**
+	 * Current Player health
+	 */
 	private int health = 5;
+
+	/**
+	 * X coordinate of the initial location
+	 */
 	private int initialX;
+
+	/**
+	 * Y coordinate of the initial location
+	 */
 	private int initialY;
+
+	/**
+	 * X coordinate of the current location
+	 */
 	private int x;
+
+	/**
+	 * Y coordinate of the current location
+	 */
 	private int y;
+
+	/**
+	 * Reference to the game board
+	 */
 	private Board board;
+
+	/**
+	 * Player name set by player
+	 */
 	private String name;
+
+	/**
+	 * Player representation set in board
+	 */
 	private String repr;
 
 	/**
-	 * Constructs player object
+	 * Constructs player an assigns initial values
 	 *
 	 * @param x     initial x coordinate
 	 * @param y     initial y coordinate
@@ -52,6 +126,12 @@ public class Player {
 	}
 
 
+	/**
+	 * Checks if players instruction blocks are at a consistent size
+	 * and there are no repeating instructions e.g FF
+	 *
+	 * @throws InvalidPlayerConfigurationException if conditions not satisfied
+	 */
 	public void validatePlayer() throws InvalidPlayerConfigurationException {
 		int initialBlockSize = this.instructions.get(0).size();
 		for (ArrayList<String> block : this.instructions) {
@@ -89,9 +169,9 @@ public class Player {
 
 	/**
 	 * Decreases player health by value specified
-	 * in factor
+	 * in {@code factor}
 	 *
-	 * @param factor factor to decrease health by
+	 * @param factor amount to decrease health by
 	 */
 	public void decreaseHealth(int factor) {
 		this.health -= factor;
@@ -103,10 +183,10 @@ public class Player {
 	}
 
 	/**
-	 * Checks if the player has won
+	 * Checks if number of flags collected by player is equals
+	 * to the number of flags on board<br>
 	 *
-	 * @return a {@code Boolean} which specifies true if the player has won,
-	 * and false otherwise
+	 * @return {@code true} = player has won, {@code false} = player has not won yet
 	 */
 	public boolean checkWin() {
 		// checks is play flag list is equal to list of all flags on the board
@@ -114,7 +194,8 @@ public class Player {
 	}
 
 	/**
-	 * Adds flag to player. Checks if flag is in the right order before adding
+	 * Checks if flag is in correct order before adding
+	 * to player otherwise ignores it.
 	 *
 	 * @param flag flag to be added
 	 */
@@ -140,8 +221,12 @@ public class Player {
 	}
 
 	/**
-	 * Decreases health of first player found directly
-	 * in front of player
+	 * Resolves first player directly in front of current player and
+	 * if a player is found its health is decreased by one.
+	 *
+	 * {@see Board#checkPlayerAtLocation}
+	 * {@see Player#getDirection}
+	 * {@see Player#decreaseHealth}
 	 */
 	public void fireLaser() {
 		// function may need optimisation
@@ -194,7 +279,7 @@ public class Player {
 
 	/**
 	 * calls {@link board.BoardEntity#act(Player, BoardEntity)} of {@code BoardEntity} player
-	 * is on top of
+	 * is on top of. This may affect
 	 */
 	public void activateEntity() {
 		this.onTopOf.act(this, this.prevEntity);
@@ -422,6 +507,10 @@ public class Player {
 	 */
 	public String getRepr() {
 		return this.repr;
+	}
+
+	public int getHealth() {
+		return this.health;
 	}
 
 	/**

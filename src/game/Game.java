@@ -8,6 +8,7 @@ import java.io.File;
 import java.io.IOException;
 import java.nio.file.Files;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.HashMap;
 import java.util.List;
 
@@ -79,7 +80,7 @@ public class Game {
 			this.board = new Board(new ArrayList<>(Files.readAllLines(new File(brdPath).toPath())));
 			this.players = this.board.getPlayers();
 			List<String> lines = Files.readAllLines(new File(prgPath).toPath());
-			this.setInitialPlayerNamesRepr(lines.get(1).split(" "));
+			this.setInitialPlayerNamesRepr(new ArrayList<>(Arrays.asList(lines.get(1).split(" "))));
 
 			// set initial player instructions
 			for (int i = 2; i < lines.size(); i++) {
@@ -117,7 +118,7 @@ public class Game {
 		// ArrayList -> [...., ....., ....., .....] # board
 		this.board = new Board(board);
 		this.players = this.board.getPlayers();
-		this.setInitialPlayerNamesRepr((String[]) playersHM.keySet().toArray());
+		this.setInitialPlayerNamesRepr(new ArrayList<>(playersHM.keySet()));
 
 		// initialize player instructions
 		try {
@@ -165,11 +166,11 @@ public class Game {
 	 * @see Player#getName()
 	 * @see Player#getRepr()
 	 */
-	private void setInitialPlayerNamesRepr(String[] names) {
+	private void setInitialPlayerNamesRepr(ArrayList<String> names) {
 		// set initial player names and repr
-		for (int i = 0; i < names.length; i++) {
+		for (int i = 0; i < names.size(); i++) {
 			Player p = this.players.get(i);
-			p.setName(names[i]); // sets name
+			p.setName(names.get(i)); // sets name
 			BoardEntity bE = this.board.getEntity(p.getX(), p.getY());
 			bE.setRepr(p.getRepr()); // sets initial repr
 		}

@@ -222,6 +222,7 @@ public class Board {
 	private Player findPlayerInVerticalLasers() {
 		// ( -> ) finds first player in laser path and returns
 		// if non found returns null
+		// TODO support multiple players
 		boolean pointFound = false;
 		int index = 0;
 		for (int y = 0; y < this.board.size(); y++) {
