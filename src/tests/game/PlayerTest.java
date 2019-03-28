@@ -1,20 +1,19 @@
 package tests.game;
 
 
-import static org.junit.jupiter.api.Assertions.*;
+import board.InvalidBoardException;
+import game.Game;
+import game.InvalidPlayerConfigurationException;
+import game.Player;
+import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.Test;
 
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.HashMap;
 
-import board.InvalidBoardException;
-import game.InvalidPlayerConfigurationException;
-import org.junit.jupiter.api.BeforeEach;
-import org.junit.jupiter.api.Test;
-
-import game.Game;
-import game.Player;
+import static org.junit.jupiter.api.Assertions.*;
 
 
 class TestPlayers {
@@ -133,13 +132,7 @@ class TestPlayers {
 		p1.fireLaser();
 		//tested pits to see if health dropped
 		assertEquals(p2.getHealth(), 4);
-
 	}
-
-	/*@Test
-	void testActivateBoard() {
-		//cant really test
-	}*/
 
 	@Test
 	void testRestPlayer() {
