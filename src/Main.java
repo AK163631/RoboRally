@@ -1,6 +1,6 @@
-package game;
-
 import board.InvalidBoardException;
+import game.Game;
+import game.InvalidPlayerConfigurationException;
 
 import java.io.IOException;
 import java.util.ArrayList;
@@ -43,8 +43,6 @@ public class Main {
 		try {
 
 			g = fromCustom();
-			System.exit(0);
-
 		} catch (Exception e) {
 
 			System.out.println(e.toString());
