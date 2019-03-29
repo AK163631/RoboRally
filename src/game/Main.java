@@ -8,7 +8,7 @@ import java.util.Arrays;
 import java.util.HashMap;
 
 /**
- * Class Main which starts the game
+ * Entry
  *
  * @author Asad Khan
  */

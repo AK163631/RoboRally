@@ -7,6 +7,7 @@ import board.NoLocation;
 
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.List;
 import java.util.Set;
 
 
@@ -145,10 +146,9 @@ public class Player {
 			// checks if instructions are all the same
 			// loops through in block in sets of 2
 			for (int start = 0, end = 2; end <= block.size(); start++, end++) {
-
-				if (Set.copyOf(block.subList(start, end)).size() == 1) {
-					// sets can only have one of each item
-					// size == 1 if all items in a list are duplicate
+				List<String> blockSub = block.subList(start, end);
+				if (blockSub.get(0).equals(blockSub.get(1))) {
+					// checks if two instructions next to each other are the same
 					throw new InvalidPlayerConfigurationException("Repetition of " + block.get(start) + " in block "
 							+ String.join("", block) + " for player " + this.name);
 				}
@@ -523,7 +523,9 @@ public class Player {
 	}
 
 	/**
+	 *
 	 * @return gets current direction of player
+	 * @throws IllegalStateException Bad implementation {@code directions} is empty
 	 */
 	public String getDirection() {
 		// behaves cyclically
