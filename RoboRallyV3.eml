@@ -2,16 +2,7 @@
 <component inheritJdk="true">
 	<exclude-output/>
 	<contentEntry url="file://$MODULE_DIR$"/>
-	<lib name="apiguardian-api-1.0.0.jar" scope="COMPILE">
-		<relative-module-cls project-related="jar://$PROJECT_DIR$/libs/apiguardian-api-1.0.0.jar!/"/>
-	</lib>
-	<lib name="junit-jupiter-api-5.0.0.jar" scope="COMPILE">
-		<relative-module-cls project-related="jar://$PROJECT_DIR$/libs/junit-jupiter-api-5.0.0.jar!/"/>
-	</lib>
-	<lib name="junit-platform-commons-1.0.0.jar" scope="COMPILE">
-		<relative-module-cls project-related="jar://$PROJECT_DIR$/libs/junit-platform-commons-1.0.0.jar!/"/>
-	</lib>
-	<lib name="opentest4j-1.0.0.jar" scope="COMPILE">
-		<relative-module-cls project-related="jar://$PROJECT_DIR$/libs/opentest4j-1.0.0.jar!/"/>
-	</lib>
+	<levels>
+		<level name="junit-jupiter-api-5.4.0-RC2" value="project"/>
+	</levels>
 </component>
