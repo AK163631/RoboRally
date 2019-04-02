@@ -1,0 +1,14 @@
+<component name="libraryTable">
+  <library name="junit-jupiter-api-5.4.0-RC2">
+    <CLASSES>
+      <root url="jar://$USER_HOME$/IntelliJ/lib/junit-jupiter-api-5.4.0-RC2.jar!/" />
+      <root url="jar://$USER_HOME$/IntelliJ/lib/junit-platform-commons-1.4.0-RC2.jar!/" />
+      <root url="jar://$USER_HOME$/IntelliJ/lib/junit-jupiter-engine-5.4.0-RC2.jar!/" />
+      <root url="jar://$USER_HOME$/IntelliJ/lib/junit-platform-engine-1.4.0-RC2.jar!/" />
+      <root url="jar://$USER_HOME$/IntelliJ/lib/junit-platform-commons-1.0.0-M6.jar!/" />
+      <root url="jar://$USER_HOME$/IntelliJ/lib/junit-jupiter-params-5.4.0-RC2.jar!/" />
+    </CLASSES>
+    <JAVADOC />
+    <SOURCES />
+  </library>
+</component>
