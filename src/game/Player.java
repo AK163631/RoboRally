@@ -8,7 +8,6 @@ import board.NoLocation;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
-import java.util.Set;
 
 
 /**
@@ -32,17 +31,17 @@ public class Player {
 	/**
 	 * List of instructions to be executed
 	 */
-	private ArrayList<ArrayList<String>> instructions = new ArrayList<>();
+	private List<List<String>> instructions = new ArrayList<>();
 
 	/**
 	 * Constant list of directions available to the player clock wise order
 	 */
-	private final ArrayList<String> directions = new ArrayList<>(Arrays.asList("N", "E", "S", "W"));
+	private final List<String> directions = new ArrayList<>(Arrays.asList("N", "E", "S", "W"));
 
 	/**
 	 * List of flags player has collected
 	 */
-	private ArrayList<Flag> flags = new ArrayList<>();
+	private List<Flag> flags = new ArrayList<>();
 
 	/**
 	 * {@link BoardEntity} player was previously on of
@@ -135,7 +134,7 @@ public class Player {
 	 */
 	public void validatePlayer() throws InvalidPlayerConfigurationException {
 		int initialBlockSize = this.instructions.get(0).size();
-		for (ArrayList<String> block : this.instructions) {
+		for (List<String> block : this.instructions) {
 
 			// checks if block sizes are inconsistent
 			if (block.size() != initialBlockSize) {
@@ -156,7 +155,7 @@ public class Player {
 			}
 
 
-			ArrayList<String> al = new ArrayList<>(Arrays.asList("L", "R", "U", "F", "B", "W"));
+			List<String> al = new ArrayList<>(Arrays.asList("L", "R", "U", "F", "B", "W"));
 			for (String i : block) {
 				// check if instruction in not in accepted instructions
 				if (!al.contains(i)) {

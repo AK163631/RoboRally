@@ -166,9 +166,13 @@ public class Game {
 	 * @see Player#getName()
 	 * @see Player#getRepr()
 	 */
-	private void setInitialPlayerNamesRepr(ArrayList<String> names) {
+	private void setInitialPlayerNamesRepr(ArrayList<String> names) throws InvalidPlayerConfigurationException {
 		// set initial player names and repr
-		for (int i = 0; i < names.size(); i++) {
+		if (this.players.size() < 1 || names.size() < 1) {
+			throw new InvalidPlayerConfigurationException("No Players Found");
+		}
+
+		for (int i = 0; i < this.players.size() && i < names.size(); i++) {
 			Player p = this.players.get(i);
 			p.setName(names.get(i)); // sets name
 			BoardEntity bE = this.board.getEntity(p.getX(), p.getY());

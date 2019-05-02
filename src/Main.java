@@ -37,8 +37,11 @@ public class Main {
 		return new Game(hm, al);
 	}
 
+
 	// example usage of game class
 	public static void main(String[] args) {
+
+
 		Game g = null;
 		try {
 

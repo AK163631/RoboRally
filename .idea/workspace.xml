@@ -2,13 +2,12 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="fdbf9d3d-8624-4911-926f-5980cd0f1cd8" name="Default Changelist" comment="">
-      <change beforePath="$PROJECT_DIR$/.classpath" beforeDir="false" afterPath="$PROJECT_DIR$/.classpath" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/RoboRallyV3.eml" beforeDir="false" afterPath="$PROJECT_DIR$/RoboRallyV3.eml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/libs/apiguardian-api-1.0.0.jar" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/libs/junit-jupiter-api-5.0.0.jar" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/libs/junit-platform-commons-1.0.0.jar" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/libs/opentest4j-1.0.0.jar" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/docs/UML.drawio" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Main.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Main.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/game/Game.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/game/Game.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/game/Player.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/game/Player.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/tests/board/BoardTest.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/tests/board/BoardTest.java" afterDir="false" />
     </list>
     <ignored path="$PROJECT_DIR$/bin/" />
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
@@ -22,8 +21,8 @@
       <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/board/Board.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="612">
-              <caret line="41" column="21" selection-start-line="41" selection-start-column="21" selection-end-line="41" selection-end-column="21" />
+            <state relative-caret-position="918">
+              <caret line="59" column="26" selection-start-line="59" selection-start-column="21" selection-end-line="59" selection-end-column="26" />
               <folding>
                 <element signature="imports" expanded="true" />
               </folding>
@@ -32,10 +31,61 @@
         </entry>
       </file>
       <file pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/game/Game.java">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="108">
+              <caret line="173" lean-forward="true" selection-start-line="173" selection-end-line="173" />
+              <folding>
+                <element signature="imports" expanded="true" />
+              </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/board/Conveyor.java">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="323">
+              <caret line="19" column="34" selection-start-line="19" selection-start-column="34" selection-end-line="19" selection-end-column="34" />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/board/Gears.java">
+          <provider selected="true" editor-type-id="text-editor">
+            <state>
+              <caret column="14" selection-start-column="14" selection-end-column="14" />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/board/Pit.java">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="204">
+              <caret line="12" column="4" selection-start-line="12" selection-start-column="4" selection-end-line="12" selection-end-column="4" />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/Main.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="714">
-              <caret line="49" column="9" selection-start-line="49" selection-start-column="9" selection-end-line="49" selection-end-column="9" />
+            <state relative-caret-position="200">
+              <caret line="30" column="31" lean-forward="true" selection-start-line="30" selection-start-column="31" selection-end-line="30" selection-end-column="31" />
+              <folding>
+                <element signature="imports" expanded="true" />
+              </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/game/Player.java">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="404">
+              <caret line="552" column="7" selection-start-line="552" selection-start-column="7" selection-end-line="552" selection-end-column="7" />
               <folding>
                 <element signature="imports" expanded="true" />
               </folding>
@@ -46,14 +96,10 @@
       <file pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/src/tests/board/BoardTest.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="238">
-              <caret line="14" column="20" lean-forward="true" selection-start-line="14" selection-start-column="20" selection-end-line="14" selection-end-column="20" />
+            <state relative-caret-position="472">
+              <caret line="50" column="24" selection-start-line="50" selection-start-column="24" selection-end-line="50" selection-end-column="24" />
               <folding>
                 <element signature="imports" expanded="true" />
-                <element signature="e#182#183#0" expanded="true" />
-                <element signature="e#198#199#0" expanded="true" />
-                <element signature="e#264#265#0" expanded="true" />
-                <element signature="e#287#288#0" expanded="true" />
               </folding>
             </state>
           </provider>
@@ -94,20 +140,20 @@
         <option value="$PROJECT_DIR$/README.md" />
         <option value="$PROJECT_DIR$/src/main/Main.java" />
         <option value="$PROJECT_DIR$/src/board/CornerConveyor.java" />
-        <option value="$PROJECT_DIR$/src/game/Game.java" />
         <option value="$PROJECT_DIR$/src/tests/PlayerTests.java" />
         <option value="$PROJECT_DIR$/src/tests/game/PlayerTests.java" />
         <option value="$PROJECT_DIR$/src/tests/game/PlayerTest.java" />
         <option value="$PROJECT_DIR$/src/game/Main.java" />
-        <option value="$PROJECT_DIR$/src/game/Player.java" />
-        <option value="$PROJECT_DIR$/src/Main.java" />
         <option value="$PROJECT_DIR$/src/board/Board.java" />
+        <option value="$PROJECT_DIR$/src/Main.java" />
+        <option value="$PROJECT_DIR$/src/game/Player.java" />
+        <option value="$PROJECT_DIR$/src/game/Game.java" />
         <option value="$PROJECT_DIR$/src/tests/board/BoardTest.java" />
       </list>
     </option>
   </component>
   <component name="ProjectFrameBounds" extendedState="6">
-    <option name="x" value="1905" />
+    <option name="x" value="-15" />
     <option name="width" value="1950" />
     <option name="height" value="2075" />
   </component>
@@ -118,6 +164,7 @@
     </navigator>
     <panes>
       <pane id="Scope" />
+      <pane id="PackagesPane" />
       <pane id="ProjectPane">
         <subPane>
           <expand>
@@ -130,11 +177,35 @@
               <item name="RoboRallyV4" type="462c0819:PsiDirectoryNode" />
               <item name="src" type="462c0819:PsiDirectoryNode" />
             </path>
+            <path>
+              <item name="RoboRallyV4" type="b2602c69:ProjectViewProjectNode" />
+              <item name="RoboRallyV4" type="462c0819:PsiDirectoryNode" />
+              <item name="src" type="462c0819:PsiDirectoryNode" />
+              <item name="board" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="RoboRallyV4" type="b2602c69:ProjectViewProjectNode" />
+              <item name="RoboRallyV4" type="462c0819:PsiDirectoryNode" />
+              <item name="src" type="462c0819:PsiDirectoryNode" />
+              <item name="game" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="RoboRallyV4" type="b2602c69:ProjectViewProjectNode" />
+              <item name="RoboRallyV4" type="462c0819:PsiDirectoryNode" />
+              <item name="src" type="462c0819:PsiDirectoryNode" />
+              <item name="tests" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="RoboRallyV4" type="b2602c69:ProjectViewProjectNode" />
+              <item name="RoboRallyV4" type="462c0819:PsiDirectoryNode" />
+              <item name="src" type="462c0819:PsiDirectoryNode" />
+              <item name="tests" type="462c0819:PsiDirectoryNode" />
+              <item name="board" type="462c0819:PsiDirectoryNode" />
+            </path>
           </expand>
           <select />
         </subPane>
       </pane>
-      <pane id="PackagesPane" />
     </panes>
   </component>
   <component name="PropertiesComponent">
@@ -142,8 +213,8 @@
     <property name="Repository.Attach.Annotations" value="false" />
     <property name="Repository.Attach.JavaDocs" value="false" />
     <property name="Repository.Attach.Sources" value="false" />
-    <property name="com.android.tools.idea.instantapp.provision.ProvisionBeforeRunTaskProvider.myTimeStamp" value="1554214501445" />
-    <property name="last_opened_file_path" value="$PROJECT_DIR$/libs" />
+    <property name="com.android.tools.idea.instantapp.provision.ProvisionBeforeRunTaskProvider.myTimeStamp" value="1556807153355" />
+    <property name="last_opened_file_path" value="$USER_HOME$/Downloads/Robot Rally/RoboRally-master-1" />
     <property name="project.structure.last.edited" value="Modules" />
     <property name="project.structure.proportion" value="0.15" />
     <property name="project.structure.side.proportion" value="0.2" />
@@ -166,7 +237,7 @@
       </list>
     </option>
   </component>
-  <component name="RunManager" selected="JUnit.BoardTest">
+  <component name="RunManager" selected="JUnit.BoardTest.testValidateBoard">
     <configuration name="Main" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
       <option name="MAIN_CLASS_NAME" value="Main" />
       <module name="RoboRallyV3" />
@@ -195,6 +266,22 @@
         <option name="Make" enabled="true" />
       </method>
     </configuration>
+    <configuration name="BoardTest.testValidateBoard" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
+      <module name="RoboRallyV3" />
+      <extension name="coverage">
+        <pattern>
+          <option name="PATTERN" value="tests.board.*" />
+          <option name="ENABLED" value="true" />
+        </pattern>
+      </extension>
+      <option name="PACKAGE_NAME" value="tests.board" />
+      <option name="MAIN_CLASS_NAME" value="tests.board.BoardTest" />
+      <option name="METHOD_NAME" value="testValidateBoard" />
+      <option name="TEST_OBJECT" value="method" />
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
     <configuration name="TestPlayers" type="JUnit" factoryName="JUnit" nameIsGenerated="true">
       <module name="RoboRallyV3" />
       <extension name="coverage">
@@ -212,8 +299,9 @@
     </configuration>
     <recent_temporary>
       <list>
-        <item itemvalue="JUnit.BoardTest" />
+        <item itemvalue="JUnit.BoardTest.testValidateBoard" />
         <item itemvalue="Application.Main" />
+        <item itemvalue="JUnit.BoardTest" />
       </list>
     </recent_temporary>
   </component>
@@ -354,31 +442,17 @@
       <option name="project" value="LOCAL" />
       <updated>1554212884246</updated>
     </task>
-    <option name="localTasksCounter" value="19" />
+    <task id="LOCAL-00019" summary="ported to eclipse">
+      <created>1554214514994</created>
+      <option name="number" value="00019" />
+      <option name="presentableId" value="LOCAL-00019" />
+      <option name="project" value="LOCAL" />
+      <updated>1554214514994</updated>
+    </task>
+    <option name="localTasksCounter" value="20" />
     <servers />
   </component>
   <component name="TestHistory">
-    <history-entry file="TestPlayers - 2019.03.27 at 16h 47m 25s.xml">
-      <configuration name="TestPlayers" configurationId="JUnit" />
-    </history-entry>
-    <history-entry file="TestPlayers - 2019.03.28 at 15h 28m 05s.xml">
-      <configuration name="TestPlayers" configurationId="JUnit" />
-    </history-entry>
-    <history-entry file="TestPlayers - 2019.03.28 at 15h 46m 03s.xml">
-      <configuration name="TestPlayers" configurationId="JUnit" />
-    </history-entry>
-    <history-entry file="TestPlayers - 2019.03.28 at 15h 48m 16s.xml">
-      <configuration name="TestPlayers" configurationId="JUnit" />
-    </history-entry>
-    <history-entry file="TestPlayers - 2019.03.28 at 15h 49m 07s.xml">
-      <configuration name="TestPlayers" configurationId="JUnit" />
-    </history-entry>
-    <history-entry file="TestPlayers - 2019.03.28 at 15h 50m 02s.xml">
-      <configuration name="TestPlayers" configurationId="JUnit" />
-    </history-entry>
-    <history-entry file="TestPlayers - 2019.03.28 at 15h 57m 53s.xml">
-      <configuration name="TestPlayers" configurationId="JUnit" />
-    </history-entry>
     <history-entry file="TestPlayers - 2019.03.28 at 22h 36m 12s.xml">
       <configuration name="TestPlayers" configurationId="JUnit" />
     </history-entry>
@@ -387,6 +461,27 @@
     </history-entry>
     <history-entry file="BoardTest - 2019.04.02 at 14h 46m 02s.xml">
       <configuration name="BoardTest" configurationId="JUnit" />
+    </history-entry>
+    <history-entry file="BoardTest_testValidateBoard - 2019.05.02 at 15h 17m 56s.xml">
+      <configuration name="BoardTest.testValidateBoard" configurationId="JUnit" />
+    </history-entry>
+    <history-entry file="BoardTest_testValidateBoard - 2019.05.02 at 15h 21m 19s.xml">
+      <configuration name="BoardTest.testValidateBoard" configurationId="JUnit" />
+    </history-entry>
+    <history-entry file="BoardTest_testValidateBoard - 2019.05.02 at 15h 21m 54s.xml">
+      <configuration name="BoardTest.testValidateBoard" configurationId="JUnit" />
+    </history-entry>
+    <history-entry file="BoardTest_testValidateBoard - 2019.05.02 at 15h 22m 21s.xml">
+      <configuration name="BoardTest.testValidateBoard" configurationId="JUnit" />
+    </history-entry>
+    <history-entry file="BoardTest_testValidateBoard - 2019.05.02 at 15h 24m 01s.xml">
+      <configuration name="BoardTest.testValidateBoard" configurationId="JUnit" />
+    </history-entry>
+    <history-entry file="BoardTest_testValidateBoard - 2019.05.02 at 15h 25m 11s.xml">
+      <configuration name="BoardTest.testValidateBoard" configurationId="JUnit" />
+    </history-entry>
+    <history-entry file="BoardTest_testValidateBoard - 2019.05.02 at 15h 25m 26s.xml">
+      <configuration name="BoardTest.testValidateBoard" configurationId="JUnit" />
     </history-entry>
   </component>
   <component name="TodoView">
@@ -402,7 +497,7 @@
     <frame x="-6" y="-6" width="1549" height="837" extended-state="6" />
     <editor active="true" />
     <layout>
-      <window_info active="true" content_ui="combo" id="Project" order="0" sideWeight="0.49918962" visible="true" weight="0.3138833" />
+      <window_info content_ui="combo" id="Project" order="0" sideWeight="0.49918962" visible="true" weight="0.20590208" />
       <window_info id="Structure" order="1" sideWeight="0.5008104" side_tool="true" weight="0.13749161" />
       <window_info id="Image Layers" order="2" />
       <window_info id="Designer" order="3" />
@@ -411,15 +506,15 @@
       <window_info id="Favorites" order="6" side_tool="true" />
       <window_info anchor="bottom" id="Message" order="0" />
       <window_info anchor="bottom" id="Find" order="1" weight="0.32956153" />
-      <window_info anchor="bottom" id="Run" order="2" sideWeight="0.49966466" weight="0.32956153" />
+      <window_info anchor="bottom" id="Run" order="2" sideWeight="0.49899396" weight="0.32956153" />
       <window_info anchor="bottom" id="Debug" order="3" weight="0.49222064" />
       <window_info anchor="bottom" id="Cvs" order="4" weight="0.25" />
       <window_info anchor="bottom" id="Inspection" order="5" weight="0.4" />
       <window_info anchor="bottom" id="TODO" order="6" weight="0.32956153" />
       <window_info anchor="bottom" id="Terminal" order="7" weight="0.32956153" />
-      <window_info anchor="bottom" id="Event Log" order="8" sideWeight="0.50033534" side_tool="true" weight="0.24714285" />
+      <window_info anchor="bottom" id="Event Log" order="8" sideWeight="0.501006" side_tool="true" weight="0.57425743" />
       <window_info anchor="bottom" id="Version Control" order="9" sideWeight="0.49966466" weight="0.042432815" />
-      <window_info anchor="bottom" id="Messages" order="10" weight="0.32956153" />
+      <window_info anchor="bottom" id="Messages" order="10" sideWeight="0.49966466" weight="0.32956153" />
       <window_info anchor="bottom" id="Statistic" order="11" weight="0.72843" />
       <window_info anchor="right" id="Commander" internal_type="SLIDING" order="0" type="SLIDING" weight="0.4" />
       <window_info anchor="right" id="Ant Build" order="1" weight="0.24949698" />
@@ -482,20 +577,6 @@
     <option name="FILTER_TARGETS" value="false" />
   </component>
   <component name="editorHistoryManager">
-    <entry file="file://$PROJECT_DIR$/src/board/Pit.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="187">
-          <caret line="11" column="13" selection-start-line="11" selection-start-column="13" selection-end-line="11" selection-end-column="13" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/board/Gears.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="102">
-          <caret line="6" column="20" selection-start-line="6" selection-start-column="20" selection-end-line="6" selection-end-column="20" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/src/board/Flag.java">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="544">
@@ -527,9 +608,7 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/JavaDoc/index.html">
-      <provider selected="true" editor-type-id="text-editor" />
-    </entry>
+    <entry file="file://$PROJECT_DIR$/JavaDoc/index.html" />
     <entry file="file://$PROJECT_DIR$/README.md">
       <provider selected="true" editor-type-id="split-provider[text-editor;markdown-preview-editor]">
         <state split_layout="SPLIT">
@@ -558,13 +637,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="297">
           <caret line="36" column="85" selection-start-line="36" selection-start-column="85" selection-end-line="36" selection-end-column="85" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/board/Conveyor.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="323">
-          <caret line="19" column="34" selection-start-line="19" selection-start-column="34" selection-end-line="19" selection-end-column="34" />
         </state>
       </provider>
     </entry>
@@ -613,49 +685,9 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/game/Player.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="1679">
-          <caret line="527" column="24" selection-start-line="527" selection-start-column="24" selection-end-line="527" selection-end-column="24" />
-          <folding>
-            <element signature="imports" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/game/Game.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="625">
-          <caret line="131" selection-start-line="131" selection-end-line="131" />
-          <folding>
-            <element signature="imports" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/RoboRallyV4.userlibraries" />
     <entry file="file://$PROJECT_DIR$/RoboRallyV3.eml">
       <provider selected="true" editor-type-id="text-editor" />
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/board/Board.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="612">
-          <caret line="41" column="21" selection-start-line="41" selection-start-column="21" selection-end-line="41" selection-end-column="21" />
-          <folding>
-            <element signature="imports" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/Main.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="714">
-          <caret line="49" column="9" selection-start-line="49" selection-start-column="9" selection-end-line="49" selection-end-column="9" />
-          <folding>
-            <element signature="imports" expanded="true" />
-          </folding>
-        </state>
-      </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/RoboRallyV3.iml">
       <provider selected="true" editor-type-id="text-editor">
@@ -664,16 +696,73 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/tests/board/BoardTest.java">
+    <entry file="file://$PROJECT_DIR$/src/board/Board.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="238">
-          <caret line="14" column="20" lean-forward="true" selection-start-line="14" selection-start-column="20" selection-end-line="14" selection-end-column="20" />
+        <state relative-caret-position="918">
+          <caret line="59" column="26" selection-start-line="59" selection-start-column="21" selection-end-line="59" selection-end-column="26" />
           <folding>
             <element signature="imports" expanded="true" />
-            <element signature="e#182#183#0" expanded="true" />
-            <element signature="e#198#199#0" expanded="true" />
-            <element signature="e#264#265#0" expanded="true" />
-            <element signature="e#287#288#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/board/Conveyor.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="323">
+          <caret line="19" column="34" selection-start-line="19" selection-start-column="34" selection-end-line="19" selection-end-column="34" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/board/Gears.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state>
+          <caret column="14" selection-start-column="14" selection-end-column="14" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/board/Pit.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="204">
+          <caret line="12" column="4" selection-start-line="12" selection-start-column="4" selection-end-line="12" selection-end-column="4" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/game/Player.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="404">
+          <caret line="552" column="7" selection-start-line="552" selection-start-column="7" selection-end-line="552" selection-end-column="7" />
+          <folding>
+            <element signature="imports" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/game/Game.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="108">
+          <caret line="173" lean-forward="true" selection-start-line="173" selection-end-line="173" />
+          <folding>
+            <element signature="imports" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/Main.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="200">
+          <caret line="30" column="31" lean-forward="true" selection-start-line="30" selection-start-column="31" selection-end-line="30" selection-end-column="31" />
+          <folding>
+            <element signature="imports" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/tests/board/BoardTest.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="472">
+          <caret line="50" column="24" selection-start-line="50" selection-start-column="24" selection-end-line="50" selection-end-column="24" />
+          <folding>
+            <element signature="imports" expanded="true" />
           </folding>
         </state>
       </provider>
