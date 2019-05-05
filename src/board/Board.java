@@ -155,9 +155,11 @@ public class Board {
 						bE = new Flag(x, y - 1, "4");
 						flags.add((Flag) bE);
 						break;
+
 					case "x":
 						bE = new Pit(x, y - 1, "x");
 						break;
+
 					case "[":
 						bE = new LaserMarker(x, y - 1, "[");
 						break;

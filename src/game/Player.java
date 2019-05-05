@@ -8,6 +8,7 @@ import board.NoLocation;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
+import java.util.Set;
 
 
 /**
@@ -31,17 +32,17 @@ public class Player {
 	/**
 	 * List of instructions to be executed
 	 */
-	private List<List<String>> instructions = new ArrayList<>();
+	private ArrayList<ArrayList<String>> instructions = new ArrayList<>();
 
 	/**
 	 * Constant list of directions available to the player clock wise order
 	 */
-	private final List<String> directions = new ArrayList<>(Arrays.asList("N", "E", "S", "W"));
+	private final ArrayList<String> directions = new ArrayList<>(Arrays.asList("N", "E", "S", "W"));
 
 	/**
 	 * List of flags player has collected
 	 */
-	private List<Flag> flags = new ArrayList<>();
+	private ArrayList<Flag> flags = new ArrayList<>();
 
 	/**
 	 * {@link BoardEntity} player was previously on of
@@ -134,7 +135,7 @@ public class Player {
 	 */
 	public void validatePlayer() throws InvalidPlayerConfigurationException {
 		int initialBlockSize = this.instructions.get(0).size();
-		for (List<String> block : this.instructions) {
+		for (ArrayList<String> block : this.instructions) {
 
 			// checks if block sizes are inconsistent
 			if (block.size() != initialBlockSize) {
@@ -155,7 +156,7 @@ public class Player {
 			}
 
 
-			List<String> al = new ArrayList<>(Arrays.asList("L", "R", "U", "F", "B", "W"));
+			ArrayList<String> al = new ArrayList<>(Arrays.asList("L", "R", "U", "F", "B", "W"));
 			for (String i : block) {
 				// check if instruction in not in accepted instructions
 				if (!al.contains(i)) {
@@ -378,7 +379,7 @@ public class Player {
 	 *
 	 * @param instruction instruction character to execute
 	 */
-	private void executeInstruction(String instruction) {
+	public void executeInstruction(String instruction) {
 		switch (instruction) {
 			case "F":
 				this.moveForward();
@@ -508,6 +509,10 @@ public class Player {
 		return this.repr;
 	}
 
+	public String getCurrentInstruction() {
+		return this.instructions.get(this.instructionBlockIndex).get(this.instructionIndex);
+	}
+
 	public int getHealth() {
 		return this.health;
 	}
@@ -519,6 +524,10 @@ public class Player {
 	 */
 	public void setDirection(String direction) {
 		this.directionIndex = this.directions.indexOf(direction);
+	}
+
+	public ArrayList<ArrayList<String>> getInstructions() {
+		return this.instructions;
 	}
 
 	/**
@@ -546,6 +555,10 @@ public class Player {
 	 */
 	public BoardEntity getOnTopOf() {
 		return onTopOf;
+	}
+
+	public ArrayList<Flag> getFlags() {
+		return this.flags;
 	}
 
 	/**

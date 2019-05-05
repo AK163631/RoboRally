@@ -71,6 +71,10 @@ public abstract class BoardEntity {
 		this.repr = repr;
 	}
 
+	public String getRepr() {
+		return repr;
+	}
+
 	/**
 	 * gets the X value
 	 *
