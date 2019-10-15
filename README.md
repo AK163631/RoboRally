@@ -7,11 +7,13 @@ RoboRally Source
 ### Code
  - Figure out why test files are not acting as expected
  
- ## TODOS's For Rob
- - The GUI
+ ## TODOS's For Ayub
+ - Complete unit tests using junit jupiter
+ - UMl diagram
+ - Final reports
  
 ## TODO's For The Rest Of Team
- - Complete unit tests using junit jupiter - Ayub 
+ - Nothing (like literally nothing) - Rob
  - Noun Verb Analysis - Jimmy
 
 ## Usage 
