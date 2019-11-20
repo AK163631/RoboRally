@@ -1,20 +1,5 @@
 # RoboRally
 RoboRally Source
-## TODO's For Asad
-### Docs
- - Start on the design
- - Javadoc - partially complete
-### Code
- - Figure out why test files are not acting as expected
- 
- ## TODOS's For Ayub
- - Complete unit tests using junit jupiter
- - UMl diagram
- - Final reports
- 
-## TODO's For The Rest Of Team
- - Nothing (like literally nothing) - Rob
- - Noun Verb Analysis - Jimmy
 
 ## Usage 
 This is a basic idea of how the ```Game``` class should be used in the GUI.
@@ -29,7 +14,7 @@ ArrayList <Players>players = g.getPlayers(); //get players
 
 /*
 display board in gui
-display players and stats in gui
+display players and starts in gui
 */
 
 while(g.hasNext()) { // while game has further steps
